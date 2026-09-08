@@ -114,6 +114,7 @@ while true; do
     e|E) read -p "New message: " USER_MSG ;;
     r|R)
       COMMIT_MSG=$(claude -p "Write a git commit message. Max 72 chars, imperative mood. Output ONLY the message.\n\nDiff:\n$DIFF" 2>/dev/null)
+      COMMIT_MSG=$(echo "$COMMIT_MSG" | grep -viE "^(Co-Authored-By:|Claude-Session:)")
       SAY "Claude suggests: $COMMIT_MSG"
       read -p "[a]ccept / [e]dit: " c2
       [ "$c2" = "e" ] || [ "$c2" = "E" ] && read -p "Your version: " COMMIT_MSG

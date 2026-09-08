@@ -12,7 +12,7 @@ menu::
 		ITEM "models" "Switch between Anthropic and OpenRouter providers" && \
 		ITEM "prompts" "Manage prompt templates and persona configurations" && \
 		ITEM "skills" "Handle skill configurations and permissions" && \
-		ITEM "commit-yolo" "Fast automated commit (free tier by default)" && \
+		ITEM "commit-yolo" "Fast automated commit + push, no Claude attribution (free tier by default)" && \
 		ITEM "commit-duo" "Interactive commit with Claude review (free tier by default)" && \
 		ITEM "auto" "Toggle the blockReadsOutsideWorkingDirectories prompt on/off" && \
 		LINE'

@@ -1,0 +1,13 @@
+
+☐ if bake shady, turn that into mutagen 
+
+☐ how to make sure all this is installed? and where?
+zsh
+git
+curl
+ca-certificates
+less
+vim
+zoxide
+lsd
+make

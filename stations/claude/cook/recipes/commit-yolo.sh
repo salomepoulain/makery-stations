@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Yolo commit: Claude stages, writes the message, and pushes. No interaction.
+# Yolo commit: writes the message, then commits and pushes under your own
+# git/gh credentials. Never attributes the commit to Claude.
 set -e
 
 source "$(dirname "${BASH_SOURCE[0]}")/../personality.sh"
@@ -85,6 +86,10 @@ Rules:
 
 Diff:
 $DIFF" 2>/dev/null)
+
+# Strip any attribution trailers the subprocess may have added on its own -
+# this recipe never commits as Claude, only the human does.
+COMMIT_MSG=$(echo "$COMMIT_MSG" | grep -viE "^(Co-Authored-By:|Claude-Session:)")
 
 SAY "This is the message"
 echo "$COMMIT_MSG"

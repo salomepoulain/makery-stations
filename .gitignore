@@ -4,3 +4,8 @@
 .after/
 __trash__/
 __stash__
+settings.local.json
+.claude
+CLAUDE.local.md
+.claude-free
+CLAUDE.local.md.bak.*
