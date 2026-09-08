@@ -11,11 +11,22 @@
 # zoxide/lsd, installs chezmoi, oh-my-zsh, powerlevel10k and the zsh
 # plugins referenced in the dotfiles, then applies the dotfiles via
 # chezmoi (asking for confirmation the first time, since that step can
-# overwrite existing files).
+# overwrite existing files; every later run pulls latest and re-applies
+# automatically). Also drops a .vscode/settings.json at the project root
+# so VS Code's integrated terminal defaults to zsh here too.
 
 set -e
 
 source "$(dirname "${BASH_SOURCE[0]}")/../personality.sh"
+
+find_project_root() {
+    local current="$PWD"
+    while [[ "$current" != "/" ]]; do
+        [[ -d "$current/.makery" ]] && echo "$current" && return
+        current=$(dirname "$current")
+    done
+    return 1
+}
 
 DOTFILES_REPO="https://github.com/salomepoulain/dotfiles.git"
 BIN_DIR="$HOME/.local/bin"
@@ -103,8 +114,8 @@ fi
 # --- apply dotfiles (confirm only the first time; reruns are pure chezmoi diffs) ---
 CHEZMOI_SOURCE_DIR="$HOME/.local/share/chezmoi"
 if [ -d "$CHEZMOI_SOURCE_DIR" ]; then
-    SAY "Dotfiles already managed by chezmoi, re-applying (only changed files touched)..."
-    "$CHEZMOI" apply
+    SAY "Dotfiles already managed by chezmoi, pulling latest and re-applying..."
+    "$CHEZMOI" update
     APPLIED=true
 else
     SAY "Initializing chezmoi from $DOTFILES_REPO..."
@@ -142,4 +153,56 @@ if [ "$APPLIED" = true ] && command -v zsh >/dev/null 2>&1; then
     SAY "Done. Run 'exec zsh' (or start a new session) to pick up the new shell."
 else
     SAY "Not switching your default shell yet - re-run this once dotfiles are applied."
+fi
+
+# --- VS Code: default this project's integrated terminal to zsh too ---
+# (separate from chsh/.bashrc above - VS Code's Remote-SSH terminal doesn't
+# always go through a login shell, so it can still land on bash otherwise)
+if command -v zsh >/dev/null 2>&1; then
+    ZSH_BIN="$(command -v zsh)"
+    PROJECT_ROOT=$(find_project_root) || PROJECT_ROOT=""
+    if [ -n "$PROJECT_ROOT" ]; then
+        VSCODE_DIR="$PROJECT_ROOT/.vscode"
+        SETTINGS_FILE="$VSCODE_DIR/settings.json"
+        mkdir -p "$VSCODE_DIR"
+        if command -v python3 >/dev/null 2>&1; then
+            python3 - "$SETTINGS_FILE" "$ZSH_BIN" <<'PYEOF'
+import json, sys, os
+
+path, zsh_bin = sys.argv[1], sys.argv[2]
+data = {}
+if os.path.isfile(path):
+    try:
+        with open(path) as f:
+            data = json.load(f)
+    except Exception:
+        data = {}
+
+data["terminal.integrated.defaultProfile.linux"] = "zsh"
+profiles = data.get("terminal.integrated.profiles.linux", {})
+profiles["zsh"] = {"path": zsh_bin, "args": ["-l"]}
+data["terminal.integrated.profiles.linux"] = profiles
+
+with open(path, "w") as f:
+    json.dump(data, f, indent=2)
+    f.write("\n")
+PYEOF
+            SAY "Wrote $SETTINGS_FILE (VS Code will default to zsh here)"
+        elif [ ! -f "$SETTINGS_FILE" ]; then
+            cat > "$SETTINGS_FILE" <<EOF2
+{
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "terminal.integrated.profiles.linux": {
+    "zsh": {
+      "path": "$ZSH_BIN",
+      "args": ["-l"]
+    }
+  }
+}
+EOF2
+            SAY "Wrote $SETTINGS_FILE (VS Code will default to zsh here)"
+        else
+            SAY "python3 not found and $SETTINGS_FILE already exists - add the zsh terminal profile there manually"
+        fi
+    fi
 fi
