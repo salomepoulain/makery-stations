@@ -1,0 +1,39 @@
+{
+  "openrouter_models": [
+    "deepseek/deepseek-r1:free",
+    "qwen/qwen-qwq:free"
+  ],
+  "timeout_seconds": 120,
+  "permissions_allow": [
+    "Read",
+    "Grep",
+    "Glob",
+    "Bash(ls *)",
+    "Bash(find *)",
+    "Bash(wc *)",
+    "Bash(git log *)",
+    "Bash(git diff *)",
+    "Bash(git show *)",
+    "Bash(git branch *)",
+    "Bash(git status *)",
+    "Bash(rtk ls *)",
+    "Bash(rtk grep *)",
+    "Bash(rtk find *)",
+    "Bash(rtk read *)",
+    "Bash(rtk git log *)",
+    "Bash(rtk git diff *)",
+    "Bash(rtk git show *)",
+    "Bash(rtk git status)"
+  ],
+  "permissions_deny": [
+    "Write",
+    "Edit",
+    "NotebookEdit",
+    "Bash(rm *)",
+    "Bash(git commit *)",
+    "Bash(git push *)",
+    "Bash(git add *)",
+    "Bash(curl *)",
+    "Bash(wget *)"
+  ]
+}

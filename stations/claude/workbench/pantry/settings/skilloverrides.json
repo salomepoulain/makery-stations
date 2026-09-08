@@ -1,0 +1,19 @@
+{
+  "skillOverrides": {
+    "code-review": "off",
+    "simplify": "off",
+    "security-review": "off",
+    "run": "off",
+    "init": "off",
+    "design": "off",
+    "dataviz": "off",
+    "artifact-design": "off",
+    "artifact-diagramming": "off",
+    "artifact-capabilities": "off",
+    "keybindings-help": "off",
+    "loop": "off",
+    "schedule": "off",
+    "claude-api": "off",
+    "fewer-permission-prompts": "off"
+  }
+}

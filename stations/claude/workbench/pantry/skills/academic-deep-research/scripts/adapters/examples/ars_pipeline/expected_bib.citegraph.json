@@ -1,0 +1,28 @@
+{
+  "co_citations": [],
+  "edges": [
+    {
+      "cited": "mancino2025memecoin",
+      "citing": "bibliography",
+      "context": "- **Mancino 2025 (ISCC).** Comparator-inadequate (no comparator beyond intra-platform time-series comparisons).",
+      "source": "bibliography"
+    },
+    {
+      "cited": "gerzon2025quantifying",
+      "citing": "synthesis",
+      "context": "The Gerzon (2025) study measures Jito sandwiching MEV.",
+      "source": "synthesis"
+    },
+    {
+      "cited": "mancino2025memecoin",
+      "citing": "synthesis",
+      "context": "Mancino (2025) characterizes\nthe memecoin phenomenon on Solana.",
+      "source": "synthesis"
+    }
+  ],
+  "edges_live": 0,
+  "edges_static": 3,
+  "nodes_total": 4,
+  "schema": "ars_citegraph/1",
+  "unresolved": []
+}

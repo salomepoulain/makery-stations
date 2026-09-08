@@ -1,0 +1,18 @@
+# ============================================================================
+#  LINE COOK STATION: CONTRABAND (.gitignore entries)
+# ============================================================================
+# List files or folders that the Git Health Inspector should never see.
+# When this cook is hired, these lines are appended to the project .gitignore.
+
+report/**/*.aux
+report/**/*.bbl
+report/**/*.blg
+report/**/*.log
+report/**/*.out
+report/**/*.toc
+report/**/*.lof
+report/**/*.lot
+report/**/*.fls
+report/**/*.fdb_latexmk
+report/**/*.synctex.gz
+report/**/missfont.log

@@ -1,0 +1,89 @@
+literature_corpus:
+- adapter_name: ars_pipeline.py
+  adapter_version: 1.0.0
+  authors:
+  - family: Gerzon
+    given: N.
+  - family: Weintraub
+    given: B.
+  - family: In
+    given: J.
+  - family: Mislove
+    given: A.
+  - family: Nita-Rotaru
+    given: C.
+  citation_key: gerzon2025quantifying
+  doi: 10.1145/3730567.3764493
+  obtained_at: '2026-09-07T16:22:10Z'
+  obtained_via: manual
+  source_pointer: https://doi.org/10.1145/3730567.3764493
+  title: 'Quantifying the threat of sandwiching MEV on Jito: A measurement of Solana''s leading validator client'
+  venue: Proceedings of the 2025 ACM Internet Measurement Conference (IMC '25)
+  venue_type: conference-paper
+  venue_type_provenance: adapter_declared
+  year: 2025
+- adapter_name: ars_pipeline.py
+  adapter_version: 1.0.0
+  arxiv_id: 2601.08641v3
+  authors:
+  - family: Luo
+    given: Y.
+  - family: Feng
+    given: Y.
+  - family: Xu
+    given: J.
+  - family: Liu
+    given: Y.
+  citation_key: luo2026resisting
+  obtained_at: '2026-09-07T16:22:10Z'
+  obtained_via: manual
+  source_pointer: https://arxiv.org/abs/2601.08641
+  title: 'Resisting manipulative bots in meme coin copy trading: A multi-agent approach with chain-of-thought reasoning'
+  venue: arXiv:2601.08641v3
+  venue_type: preprint
+  venue_type_provenance: adapter_declared
+  year: 2026
+- adapter_name: ars_pipeline.py
+  adapter_version: 1.0.0
+  authors:
+  - family: Mancino
+    given: D.
+  citation_key: mancino2025memecoin
+  doi: 10.1109/ISCC.12345
+  obtained_at: '2026-09-07T16:22:10Z'
+  obtained_via: manual
+  source_pointer: https://doi.org/10.1109/ISCC.12345
+  title: 'The memecoin phenomenon: An in-depth study of Solana''s blockchain trends'
+  venue: Proceedings of the IEEE Symposium on Computers and Communications (ISCC 2025)
+  venue_type: conference-paper
+  venue_type_provenance: adapter_declared
+  year: 2025
+- adapter_name: ars_pipeline.py
+  adapter_version: 1.0.0
+  authors:
+  - family: Wu
+    given: C.
+  - family: Chen
+    given: J.
+  - family: Zhao
+    given: Z.
+  - family: He
+    given: K.
+  - family: Xu
+    given: G.
+  - family: Wu
+    given: Y.
+  - family: Wang
+    given: H.
+  - family: Xiang
+    given: Y.
+  citation_key: wu2024tokenscout
+  doi: 10.1145/3658644.3690234
+  obtained_at: '2026-09-07T16:22:10Z'
+  obtained_via: manual
+  source_pointer: https://doi.org/10.1145/3658644.3690234
+  title: 'TokenScout: Early detection of Ethereum scam tokens via temporal graph learning'
+  venue: Proceedings of the 2024 ACM SIGSAC Conference on Computer and Communications Security (CCS '24)
+  venue_type: conference-paper
+  venue_type_provenance: adapter_declared
+  year: 2024

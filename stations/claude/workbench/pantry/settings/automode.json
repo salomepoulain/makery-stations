@@ -1,0 +1,8 @@
+{
+  "autoMode": {
+    "allow": [
+      "$defaults",
+      "Running python or python3, including inline code via -c or -m, is always allowed and never needs a proceed prompt for unanalyzable file access, as long as the command has no indication of targeting files or directories outside the project or its declared additionalDirectories (no absolute paths outside those roots, no ~/ home-directory references, no /etc, /root, or other system paths in the command text)."
+    ]
+  }
+}
