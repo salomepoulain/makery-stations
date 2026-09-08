@@ -1,0 +1,10 @@
+reasoning:
+  free:
+    deepseek_r1: "deepseek/deepseek-r1:free"
+    qwq: "qwen/qwen-qwq:free"
+  paid:
+    o1: "openai/o1"
+
+general:
+  sonnet: "anthropic/claude-sonnet-4-6"
+  haiku: "anthropic/claude-haiku-4-5"

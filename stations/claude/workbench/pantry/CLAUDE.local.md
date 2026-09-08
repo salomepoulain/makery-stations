@@ -1,0 +1,1 @@
+/home/salo/.shadow/projects/sol-platform/CLAUDE.local.md

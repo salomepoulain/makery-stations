@@ -1,0 +1,24 @@
+## Pending
+
+- Build /free-edit: write-capable version of free-scout (delegates edits to
+  a free-tier OpenRouter model, not just reads). Only once free-scout has
+  proven trustworthy in real use — this is a bigger trust step than
+  read-only scouting.
+- Explore /browse integration for free-scout: let a scout delegate
+  web-fetch/JS-rendered-page work to the camofox-browser tool, not just
+  local filesystem reads. Bigger surface (live automated browser) to hand
+  to an unsupervised free-tier process, so wait until plain free-scout has
+  some track record first.
+- Re-evaluate free-scout's judgment threshold: user thinks I'm underrating
+  what free/cheap OpenRouter models can actually do, and free-scout's "when
+  to use" criteria may be more conservative than necessary. Test the free
+  models on harder, more judgment-heavy tasks (not just narrow read-only
+  lookups) before assuming they can't handle them — recalibrate the SKILL.md
+  guidance based on actual results, not assumption.
+- academic-english: source-check the 4 remaining writing-style notes not yet
+  covered (academic-phrasebank-methods, brief-guide-academic-english,
+  english-style-sheet-slavic, style-points-scientific-writing) — same
+  process used for the 23 writing_program_* files (confirmed via /browse
+  as Brandeis Writing Program handouts). Once source + license is known for
+  these too, rewrite them the same way (1 agent per topic, original
+  examples, unslop-style format) and add to academic-english/rules/.

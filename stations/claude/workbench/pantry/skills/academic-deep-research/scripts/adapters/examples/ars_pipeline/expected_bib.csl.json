@@ -1,0 +1,144 @@
+[
+  {
+    "DOI": "10.1145/3730567.3764493",
+    "URL": "https://doi.org/10.1145/3730567.3764493",
+    "author": [
+      {
+        "family": "Gerzon",
+        "given": "N."
+      },
+      {
+        "family": "Weintraub",
+        "given": "B."
+      },
+      {
+        "family": "In",
+        "given": "J."
+      },
+      {
+        "family": "Mislove",
+        "given": "A."
+      },
+      {
+        "family": "Nita-Rotaru",
+        "given": "C."
+      }
+    ],
+    "container-title": "Proceedings of the 2025 ACM Internet Measurement Conference (IMC '25)",
+    "id": "gerzon2025quantifying",
+    "issued": {
+      "date-parts": [
+        [
+          2025
+        ]
+      ]
+    },
+    "title": "Quantifying the threat of sandwiching MEV on Jito: A measurement of Solana's leading validator client",
+    "type": "paper-conference"
+  },
+  {
+    "URL": "https://arxiv.org/abs/2601.08641",
+    "_pipeline": {
+      "arxiv_id": "2601.08641v3"
+    },
+    "author": [
+      {
+        "family": "Luo",
+        "given": "Y."
+      },
+      {
+        "family": "Feng",
+        "given": "Y."
+      },
+      {
+        "family": "Xu",
+        "given": "J."
+      },
+      {
+        "family": "Liu",
+        "given": "Y."
+      }
+    ],
+    "container-title": "arXiv:2601.08641v3",
+    "id": "luo2026resisting",
+    "issued": {
+      "date-parts": [
+        [
+          2026
+        ]
+      ]
+    },
+    "title": "Resisting manipulative bots in meme coin copy trading: A multi-agent approach with chain-of-thought reasoning",
+    "type": "manuscript"
+  },
+  {
+    "DOI": "10.1109/ISCC.12345",
+    "URL": "https://doi.org/10.1109/ISCC.12345",
+    "author": [
+      {
+        "family": "Mancino",
+        "given": "D."
+      }
+    ],
+    "container-title": "Proceedings of the IEEE Symposium on Computers and Communications (ISCC 2025)",
+    "id": "mancino2025memecoin",
+    "issued": {
+      "date-parts": [
+        [
+          2025
+        ]
+      ]
+    },
+    "title": "The memecoin phenomenon: An in-depth study of Solana's blockchain trends",
+    "type": "paper-conference"
+  },
+  {
+    "DOI": "10.1145/3658644.3690234",
+    "URL": "https://doi.org/10.1145/3658644.3690234",
+    "author": [
+      {
+        "family": "Wu",
+        "given": "C."
+      },
+      {
+        "family": "Chen",
+        "given": "J."
+      },
+      {
+        "family": "Zhao",
+        "given": "Z."
+      },
+      {
+        "family": "He",
+        "given": "K."
+      },
+      {
+        "family": "Xu",
+        "given": "G."
+      },
+      {
+        "family": "Wu",
+        "given": "Y."
+      },
+      {
+        "family": "Wang",
+        "given": "H."
+      },
+      {
+        "family": "Xiang",
+        "given": "Y."
+      }
+    ],
+    "container-title": "Proceedings of the 2024 ACM SIGSAC Conference on Computer and Communications Security (CCS '24)",
+    "id": "wu2024tokenscout",
+    "issued": {
+      "date-parts": [
+        [
+          2024
+        ]
+      ]
+    },
+    "title": "TokenScout: Early detection of Ethereum scam tokens via temporal graph learning",
+    "type": "paper-conference"
+  }
+]

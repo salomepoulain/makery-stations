@@ -1,0 +1,9 @@
+zsh
+git
+curl
+ca-certificates
+less
+vim
+zoxide
+lsd
+make

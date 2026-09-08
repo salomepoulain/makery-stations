@@ -1,0 +1,922 @@
+/* Ensure terminal selection/cursor is above dropdown popups */
+
+
+*:not(.codicon), span:not([class*="codicon"]) {
+    font-family: "Fira Code", "Cascadia Code", "verdana" !important;
+    font-weight: 300 !important;
+    font-style: normal !important;
+    
+}
+
+.monaco-workbench {
+    /* font-family: "BlexMono Nerd Font Propo" !important; */
+    font-family: "Fira Code", "Cascadia Code", "verdana" !important;
+    font-weight: 300 !important;
+    font-style: "normal" !important;
+}
+
+.monaco-list .notebook-outline-element>.element-decoration.bubble {
+    font-family: codicon !important;
+}
+
+.monaco-menu,
+.monaco-menu .monaco-action-bar.vertical,
+.monaco-menu .action-item,
+.monaco-menu .action-label,
+body,
+button,
+input,
+textarea,
+select,
+p,
+li,
+h1,h2,h3,h4,h5,h6,
+code,
+pre,
+span:not([class*="codicon"]),
+/* *:not(.codicon)::before, */
+*:not(.codicon)::after {
+  font-family: "Fira Code", "Cascadia Code","verdana" !important;
+  font-weight: 300    !important;
+  font-style: normal  !important;
+}
+
+/* ensure WebView panels (like Copilot Chat) inherit it */
+.webview,
+.webview * {
+  font-family: "Fira Code", "Cascadia Code","verdana" !important;
+  font-weight: 300    !important;
+  letter-spacing: -1px !important;
+}
+
+
+
+
+:root {
+    --vscode-symbolIcon-classForeground: #e5c07b !important;
+}
+
+#outline-root{
+    --vscode-symbolIcon-classForeground: #e5c07b !important;  
+}
+
+#active-frame {
+    --vscode-symbolIcon-classForeground: #e5c07b !important;  
+}
+
+
+
+/* Remove this block if you don't want to globally override all VSCode foreground colors */
+/* :root {
+    --vscode-foreground: #839de2 !important;
+    --vscode-editor-foreground: #839de2 !important;
+    --vscode-editorWidget-foreground: #839de2 !important;
+    --vscode-sideBar-foreground: #839de2 !important;
+    --vscode-titleBar-activeForeground: #839de2 !important;
+    --vscode-titleBar-inactiveForeground: #839de2 !important;
+    --vscode-statusBar-foreground: #839de2 !important;
+    --vscode-statusBar-noFolderForeground: #839de2 !important;
+    --vscode-statusBar-debuggingForeground: #839de2 !important;
+    --vscode-activityBar-foreground: #839de2 !important;
+    --vscode-panelTitle-activeForeground: #839de2 !important;
+    --vscode-panelTitle-inactiveForeground: #839de2 !important;
+} */
+
+/* Override any element using the default VSCode foreground color */
+/* body,
+[class*="foreground"],
+[class*="color-foreground"],
+[class*="vscode-theme"] {
+    color: #839de2 !important;
+} */
+
+
+
+.minimap-shadow-visible {
+    height: 0px !important;
+}
+
+
+/* Make Explorer (side bar) font larger */
+.monaco-workbench .explorer-viewlet .monaco-list .monaco-list-row {
+    font-size: 12px !important; /* Change 18px to whatever size you prefer */
+    /* max-width: 90px !important;    Set to your preferred cutoff */
+    overflow: visible !important;
+    text-overflow: clip !important;
+    white-space: nowrap !important;
+}
+/* .monaco-editor .cursor { 
+    width: 1.7px !important;  
+    min-width: 1.7px !important; 
+    max-width: 1.7px !important; 
+}  */
+
+/* Make all scrollbars thin in VS Code (including explorer/sidebar) */
+
+
+/* Make bracket pair guides thicker */
+.monaco-editor .bracket-guide {
+    border-left-width: 3px !important;    /* Default is 1px; try 2px or 3px */
+    border-left-style: solid !important;
+    /* Optional: you can also force a color if you want, or leave it to the theme */
+}
+
+.monaco-editor .bracket-guide.active {
+    border-left-width: 4px !important;    /* Active guide even thicker if you want */
+    width: 10px;
+} 
+
+.monaco-editor .bracket-pair-guide.active {
+    border-left-width: 4px !important;    /* Active guide even thicker if you want */
+    width: 10px !important;
+} 
+
+.monaco-editor .bracket-guide {
+    border-left-width: 3px !important; /* Increase to 3px (or whatever you like) */
+    border-left-style: solid !important;
+    width: 20px;
+}
+.monaco-editor .bracket-guide.active {
+    border-left-width: 4px !important; /* Active bracket guide thicker if you want */
+}
+
+
+/*
+/* Force explorer filenames to truncate with ellipsis after a certain width */
+.monaco-list-row .label-name {
+  max-width: 20px !important;    /* Set to your preferred cutoff */
+  overflow: visible !important;
+  text-overflow: clip !important;
+  white-space: nowrap !important;
+}
+
+
+
+/* body,
+
+button,
+input,
+textarea,
+select,
+p,
+li,
+h1,h2,h3,h4,h5,h6,
+code,
+pre, */
+
+
+
+
+/* centering the buttons */
+.composite-bar-container {
+    display: flex !important;
+    justify-content: center !important;
+    /* align-items: center !important; optional: vertical centering */
+    margin-top: -10px;
+    /* margin-right: 5px; */
+
+}
+
+.part.panel.basepanel.bottom .composite-bar-container  {
+    margin-top: initial;
+}
+
+.monaco-workbench .part.sidebar .title-actions .action-item{
+    margin-right: -3px !important;
+    background-color: #22252B !important;
+
+}
+
+.composite-bar-container .title-actions a {
+    font-size: 1.2rem;
+    color: #ffffff;
+    cursor: pointer;
+    margin: 0 0px;
+    border-radius: 5px;
+}
+
+.monaco-workbench .pane-composite-part>.title>.composite-bar-container>.composite-bar>.monaco-action-bar .action-item.checked .active-item-indicator:before, .monaco-workbench .pane-composite-part>.title>.composite-bar-container>.composite-bar>.monaco-action-bar .action-item:focus .active-item-indicator:before, .monaco-workbench .pane-composite-part>.header-or-footer>.composite-bar-container>.composite-bar>.monaco-action-bar .action-item.checked .active-item-indicator:before, .monaco-workbench .pane-composite-part>.header-or-footer>.composite-bar-container>.composite-bar>.monaco-action-bar .action-item:focus .active-item-indicator:before {
+    border-top-width: 0px;
+    border-top-style: none !important;
+}
+
+
+.action-label.codicon.codicon-auxiliarybar-maximize {
+    display: none;
+}
+
+
+/* Container for the title and actions, with padding and flex properties */
+.composite.title {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start; /* Align content to the left by default */
+    transition: all 0.3s ease-in-out; 
+    /* overflow: hidden; */
+    position: relative;
+}
+
+/* Styles for the main title text */
+.composite.title h2 {
+    font-weight: normal;
+    font-size: 12px !important;
+    text-transform: uppercase;
+    flex-grow: 1; /* Allow the text to grow and shrink */
+    max-width: 100%; /* Initially allow the text to take full width */
+    transition: max-width 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    /* transition: max-width 0.3s cubic-bezier(0.19, 1, 0.22, 1), transform 0.3s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.3s cubic-bezier(0.19, 1, 0.22, 1); */
+    margin: 0;
+    white-space: nowrap;
+    /* overflow: hidden; */
+    /* text-overflow: ellipsis; */
+    min-width: 0; /* Prevents overflow issues */
+}
+
+
+
+/* Styles for the pseudo-element before the title */
+.composite.title h2::before{
+    display: inline-block;
+    margin-right: 6px;
+    font-size: 1.25rem;
+}
+
+/* Styles for the action buttons. Initially they are invisible and not clickable. */
+/* Select .title-actions inside .composite.title, but NOT if any ancestor is .part.panel.basepanel.bottom */
+.composite.title .title-actions {
+    display: flex;
+    align-items: center;
+    position: absolute; /* Take it out of the flex flow */
+    right: 0; /* Position to the right of the container */
+    top: 0;
+    height: 100%;
+    pointer-events: none; /* Not clickable when hidden */
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    /* z-index: 19990; */
+}
+
+.part.panel.basepanel.bottom .composite.title .title-actions {
+    /* Reset to default or desired styles for the bottom panel */
+    padding: initial;
+    margin: initial;
+    display: initial;
+    align-items: initial;
+    position: initial;
+    right: initial;
+    top: initial;
+    height: initial;
+    pointer-events: initial;
+    opacity: initial;
+    transform: initial;
+    transition: initial;
+}
+
+/* When hovering over the title container... */
+.composite.title:hover h2 {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: calc(120px); /* Shrink to make space for .title-actions (adjust 120px as needed) */
+}
+
+/* ...and slide in the action buttons, making them clickable */
+.composite.title:hover .title-actions {
+    opacity: 1; /* Fade in the actions */
+    pointer-events: auto; /* Make them clickable */
+    transform: translateX(0); /* Slide the actions into view */
+}
+
+
+/* selcting the terminal */
+
+
+/* Option 1: Escape spaces with backslashes */
+.action-label.codicon.separator.disabled {
+    display: none !important;
+}
+
+/* Option 2: Use attribute selector if it's actually one class name with spaces */
+/* [class="action-label codicon separator disabled"] {
+    display: none !important;
+} */
+
+/* Option 3: If you want to target elements that contain all these class names */
+/* .action-label.codicon.separator.disabled {
+    display: none !important;
+} */
+
+/* Basic button styling */
+.title-actions a {
+    /* font-size: 1.25rem; */
+    /* color: #ffffff; */
+    cursor: pointer;
+    margin: 0 5px;
+    padding: 5px;
+    /* border-radius: 5px; */
+} 
+
+/* .title-actions a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+} */
+
+
+.command-palette, .peekview {
+    border: none;
+    /* Use multiple shadows to create a soft, layered effect */
+            /* The macOS-style layered box-shadow */
+    border-radius: 8px; /* Added border-radius for a softer look */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1),
+                0 4px 8px rgba(0, 0, 0, 0.2),
+                0 10px 20px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* Add for better compatibility */
+}
+
+
+iframe[name="51510c8e-8246-47ce-b8a4-4edb6d3cf446"] .outline-node {
+    
+    color: #eee
+}
+
+
+/* .composite.title .title-actions {
+    display: none !important;
+}
+
+.composite.title:hover .title-actions {
+    display: contents !important;
+    right: 50%;
+    transform: translateX(50%);
+    /* position: absolute !important;
+    right: 0px !important; */
+    /* top: 50% !important;
+    transform: translateY(-50%) !important;
+    
+.composite.title:hover .composite.title{
+    display: none !important;
+} 
+*/
+
+
+
+
+/* .composite.title .title-actions{
+    position: absolute;
+    right: 0;
+    z-index: 1000;
+    right: 50%;
+    top: 30px ;
+    transform: translateX(50%);
+    opacity: 8;
+} */
+
+/* remove the fullscreen icon */
+
+/* make the text center aligned  */
+
+/* have the buttons appear under the text */
+
+/* or appear the icons on hover? */
+
+
+.codicon-tree-item-expanded:before {
+    /* content: '\eab4' !important; */
+    content: '\eb6e' !important;
+    color: #6D727D !important;
+    /* opacity: 30%; */
+}
+
+:root {
+    --vscode-notebook-cellBorderColor: #81a7ed;
+    --vscode-notebook-focusedEditorBorder: #81a7ed;
+    --vscode-notebookStatusSuccessIcon-foreground: #89d185;
+    --vscode-notebookEditorOverviewRuler-runningCellForeground: #89d185;
+    --vscode-notebookStatusErrorIcon-foreground: #f48771;
+    --vscode-notebookStatusRunningIcon-foreground: #cccccc;
+    --vscode-notebook-cellToolbarSeparator: rgba(128, 128, 128, 0.35);
+    --vscode-notebook-selectedCellBackground: #2c313a;
+    --vscode-notebook-selectedCellBorder: #2c313a;
+    --vscode-notebook-focusedCellBorder: rgba(255, 255, 255, 0);
+    --vscode-notebook-inactiveFocusedCellBorder: #464646;
+    --vscode-notebook-cellStatusBarItemHoverBackground: rgba(255, 255, 255, 0.15);
+    --vscode-notebook-cellInsertionIndicator: rgba(255, 255, 255, 0);
+    --vscode-notebookScrollbarSlider-background: rgba(78, 86, 102, 0.5);
+    --vscode-notebookScrollbarSlider-hoverBackground: rgba(90, 99, 117, 0.5);
+    --vscode-notebookScrollbarSlider-activeBackground: rgba(116, 125, 145, 0.5);
+    --vscode-notebook-symbolHighlightBackground: rgba(255, 255, 255, 0.04);
+    --vscode-notebook-cellEditorBackground: #2c313a;
+    --vscode-notebook-editorBackground: #282c34;
+    --notebook-markup-font-family: "CMU Serif", "STIX Two Text", "Times New Roman", serif;
+
+        --vscode-icon-notebook-kernel-select-font-family: 'pi-polar-black-font';
+        --vscode-icon-notebook-kernel-select-content: '';
+        --vscode-icon-notebook-execute-font-family: 'pi-polar-black-font';
+        --vscode-icon-notebook-execute-content: '';
+        --vscode-icon-notebook-execute-above-font-family: 'pi-polar-black-font';
+        --vscode-icon-notebook-execute-above-content: '';
+        --vscode-icon-notebook-execute-below-font-family: 'pi-polar-black-font';
+        --vscode-icon-notebook-execute-below-content: '';
+        --vscode-icon-notebook-stop-content: '\ea72';
+        --vscode-icon-notebook-stop-font-family: 'codicon';
+        --vscode-icon-notebook-delete-cell-font-family: 'pi-polar-black-font';
+        --vscode-icon-notebook-delete-cell-content: '';
+        --vscode-icon-notebook-execute-all-font-family: 'pi-polar-black-font';
+        --vscode-icon-notebook-execute-all-content: '';
+        --vscode-icon-notebook-edit-font-family: 'pi-polar-black-font';
+        --vscode-icon-notebook-edit-content: '';
+        --vscode-icon-notebook-stop-edit-font-family: 'pi-polar-black-font';
+        --vscode-icon-notebook-stop-edit-content: '';
+        --vscode-icon-notebook-move-up-font-family: 'pi-polar-black-font';
+        --vscode-icon-notebook-move-up-content: '';
+        --vscode-icon-notebook-move-down-font-family: 'pi-polar-black-font';
+        --vscode-icon-notebook-move-down-content: '';
+        --vscode-icon-notebook-clear-font-family: 'pi-polar-black-font';
+        --vscode-icon-notebook-clear-content: '';
+        --vscode-icon-notebook-split-cell-font-family: 'pi-polar-black-font';
+        --vscode-icon-notebook-split-cell-content: '';
+        --vscode-icon-notebook-state-success-font-family: 'pi-polar-black-font';
+        --vscode-icon-notebook-state-success-content: '';
+        --vscode-icon-notebook-state-error-font-family: 'pi-polar-black-font';
+        --vscode-icon-notebook-state-error-content: '';
+        --vscode-icon-notebook-state-pending-content: '\ea82';
+        --vscode-icon-notebook-state-pending-font-family: 'codicon';
+        --vscode-icon-notebook-state-executing-font-family: 'pi-polar-black-font';
+        --vscode-icon-notebook-state-executing-content: '';
+        --vscode-icon-notebook-collapsed-font-family: 'pi-polar-black-font';
+        --vscode-icon-notebook-collapsed-content: '';
+        --vscode-icon-notebook-expanded-font-family: 'pi-polar-black-font';
+        --vscode-icon-notebook-expanded-content: '';
+        --vscode-icon-notebook-open-as-text-font-family: 'pi-polar-black-font';
+        --vscode-icon-notebook-open-as-text-content: '';
+        --vscode-icon-notebook-revert-font-family: 'pi-polar-black-font';
+        --vscode-icon-notebook-revert-content: '';
+        --vscode-icon-notebook-diff-cell-toggle-whitespace-font-family: 'pi-polar-black-font';
+        --vscode-icon-notebook-diff-cell-toggle-whitespace-content: '';
+        --vscode-icon-notebook-render-output-font-family: 'pi-polar-black-font';
+        --vscode-icon-notebook-render-output-content: '';
+        --vscode-icon-notebook-mimetype-font-family: 'pi-polar-black-font';
+        --vscode-icon-notebook-mimetype-content: '';
+        --vscode-icon-notebook-copy-content: '\ebcc';
+        --vscode-icon-notebook-copy-font-family: 'codicon';
+        --vscode-icon-notebook-save-content: '\eb4b';
+        --vscode-icon-notebook-save-font-family: 'codicon';
+        --vscode-icon-notebook-diff-editor-previous-change-font-family: 'pi-polar-black-font';
+        --vscode-icon-notebook-diff-editor-previous-change-content: '';
+        --vscode-icon-notebook-diff-editor-next-change-font-family: 'pi-polar-black-font';
+        --vscode-icon-notebook-diff-editor-next-change-content: '';
+}
+
+
+/*
+599 -.notebookOverlay .input-collapse-container {                          
+600 -    display: none !important;                                         
+601 -    pointer-events: none !important;                                  
+602 -} 
+*
+
+
+/* --- Notebook layout: centered column --- */
+/* margin:auto doesn't work here because Monaco sets width: <full-panel>px as an inline
+   style. max-width caps the visual width, but margin:auto still calculates against the
+   original inline width and stays left-aligned.
+   Fix: left:50% + translateX(-50%) centers based on the actual rendered width. */
+.notebookOverlay .cell-list-container {
+    width: min(810px, 100%) !important;
+    max-width: min(810px, 100%) !important;
+    /* Asymmetric centering: shifted 40px left of true center, but clamps to 0 when
+       the panel is too narrow (so no offset kicks in on small panels). */
+    margin-left: max(0px, calc(50% - 405px - 15px)) !important;
+    margin-right: max(0px, calc(50% - 405px + 15px)) !important;
+}
+
+/* Drag handles injected by custom.js */
+.nb-resize-handle {
+    position: absolute;
+    top: 0;
+    width: 20px;
+    height: 100%;
+    cursor: ew-resize;
+    z-index: 500;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 150ms;
+}
+.nb-resize-handle::after {
+    content: '';
+    position: absolute;
+    top: 12px;
+    bottom: 12px;
+    width: 3px;
+    background: rgba(129, 167, 237, 0.65);
+    border-radius: 2px;
+}
+.nb-resize-handle.left::after  { right: 0; }
+.nb-resize-handle.right::after { left: 0; }
+.notebookOverlay:hover .nb-resize-handle,
+.nb-resize-handle.nb-dragging {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* --- Notebook mode indicators (left bar) --- */
+/* view mode (selected/focused, not editing): subtle gray line + clear VS Code's own background */
+.notebookOverlay .monaco-list-row.focused .cell-focus-indicator-left,
+.notebookOverlay .monaco-list-row.selected .cell-focus-indicator-left {
+    border-left: 3px solid rgba(150, 160, 180, 0.22) !important;
+    background: transparent !important;
+    box-sizing: border-box;
+    pointer-events: none !important;
+}
+
+/* code cells in view mode */
+.notebookOverlay .monaco-list-row.code-cell-row.focused .cell-focus-indicator-left,
+.notebookOverlay .monaco-list-row.code-cell-row.selected .cell-focus-indicator-left {
+    border-left: 5px solid rgba(150, 160, 180, 0.22) !important;
+    background: transparent !important;
+    pointer-events: none !important;
+}
+
+/* base: always clear VS Code's own gutter background and block click-to-collapse */
+.notebookOverlay .cell-focus-indicator-left {
+    background: transparent !important;
+    pointer-events: none !important;
+}
+
+/* edit mode: markdown cell open for editing — 3px, toned down */
+.notebookOverlay .cell-inner-container.markdown-cell-edit-mode .cell-focus-indicator-left {
+    border-left: 3px solid rgba(129, 167, 237, 0.55) !important;
+    box-sizing: border-box;
+}
+
+/* edit mode: code cell — Monaco editor is focused (user actively typing) — 5px, toned down */
+.notebookOverlay .monaco-list-row.code-cell-row:has(.monaco-editor.focused) .cell-focus-indicator-left {
+    border-left: 5px solid rgba(129, 167, 237, 0.55) !important;
+    box-sizing: border-box;
+}
+
+/* --- Left/right gutter symmetry --- */
+/* right gutter → 44px to match left code-cell gutter */
+.notebookOverlay .monaco-list .monaco-list-row .cell-focus-indicator-right {
+    width: 44px !important;
+}
+/* --- Notebook scrollbar: pin to right edge of panel, not right edge of column --- */
+.notebookOverlay .cell-list-container > .monaco-list > .monaco-scrollable-element > .scrollbar.vertical {
+    position: fixed !important;
+    right: 0 !important;
+    z-index: 999 !important;
+}
+
+/* right cell content margin → match left (full chain to beat VS Code's specificity) */
+.notebookOverlay .cell-list-container > .monaco-list > .monaco-scrollable-element > .monaco-list-rows > .monaco-list-row div.cell {
+    margin-right: 0px !important;
+}
+/* NOTE: .output_container lives INSIDE the sandboxed output webview iframe, so
+   custom.css cannot reach it (verified: changing left/right does nothing). The
+   output box width is owned by VS Code's webview layout, not stylable from here. */
+
+/* --- Cell toolbars: only appear when hovering the toolbar itself --- */
+.notebookOverlay .cell-title-toolbar,
+.notebookOverlay .cell-output-toolbar,
+.notebookOverlay .monaco-toolbar:has(.notebook-cell-run-toolbar) {
+    opacity: 0 !important;
+    transition: opacity 120ms ease !important;
+}
+.notebookOverlay .cell-title-toolbar:hover,
+.notebookOverlay .cell-output-toolbar:hover,
+.notebookOverlay .monaco-toolbar:has(.notebook-cell-run-toolbar):hover {
+    opacity: 1 !important;
+}
+
+
+
+#container.output_container {
+    width: 102% !important;
+}
+
+/* --- Hide per-cell code/output focus indicator bars --- */
+/* These are .codeOutput-focus-indicator (.code-focus-indicator and .output-focus-indicator)
+   inside .cell-focus-indicator-left — they render as clickable collapse bars on every cell.
+   .notebook-folding-indicator (heading fold chevron) is intentionally left untouched. */
+.notebookOverlay .codeOutput-focus-indicator-container {
+    display: none !important;
+    pointer-events: none !important;
+}
+/* Per-cell input collapse placeholder.
+   Do NOT force-hide this: VS Code already sets `display:none` inline while the
+   cell is expanded (so it stays invisible in normal use), and reveals it when
+   the input is collapsed — that placeholder is the ONLY click target to expand
+   the cell again. Hiding it unconditionally makes collapsed cells look stuck
+   with no way to recover them by mouse. Left to VS Code's native behavior. */
+
+/* --- Differentiate execute-above / execute-below toolbar icons --- */
+.notebookOverlay .codicon-notebook-execute-above::before {
+    display: inline-block !important;
+    transform: rotate(-90deg) !important;
+}
+.notebookOverlay .codicon-notebook-execute-below::before {
+    display: inline-block !important;
+    transform: rotate(90deg) !important;
+}
+
+/* --- Notebook code cell line numbers: left-aligned and faded --- */
+.notebookOverlay .monaco-editor .line-numbers {
+    text-align: left !important;
+    opacity: 0.28 !important;
+}
+
+/* --- Collapsed section visual --- */
+.notebookOverlay .notebook-folded-hint {
+    opacity: 0.6 !important;
+    border-bottom: 2px dashed rgba(129, 167, 237, 0.45) !important;
+    margin-bottom: 4px !important;
+}
+
+
+.monaco-workbench .part.editor > .content:not(.dragged-over) .editor-group-container.active > .title .tabs-container > .tab.sizing-shrink:not(.dragged):not(.sticky-compact) > .tab-label > .monaco-icon-label-container::after, .monaco-workbench .part.editor > .content:not(.dragged-over) .editor-group-container.active > .title .tabs-container > .tab.sizing-fixed:not(.dragged):not(.sticky-compact) > .tab-label > .monaco-icon-label-container::after {
+    background: linear-gradient(to left, transparent, transparent);
+    background-image: linear-gradient(to left, transparent, transparent);
+    /* background-position-x: initial; */
+    /* background-position-y: initial; */
+    /* background-size: initial; */
+    /* background-repeat: initial; */
+    /* background-attachment: initial; */
+    /* background-origin: initial; */
+    /* background-clip: initial; */
+    /* background-color: initial; */
+}
+
+
+
+.monaco-workbench .part.editor > .content:not(.dragged-over) .editor-group-container.active > .title .tabs-container > .tab.sizing-shrink.active:not(.dragged):not(.sticky-compact) > .tab-label > .monaco-icon-label-container::after, .monaco-workbench .part.editor > .content:not(.dragged-over) .editor-group-container.active > .title .tabs-container > .tab.sizing-fixed.active:not(.dragged):not(.sticky-compact) > .tab-label > .monaco-icon-label-container::after {
+    background: linear-gradient(to left, #00000000, transparent);
+}
+
+
+
+.title.tabs.show-file-icons {
+    font-size: 12px !important;
+}
+
+.monaco-workbench.mac .part.titlebar>.titlebar-container {
+    font-size: 12px !important;
+}
+
+
+.tabs-and-actions-container.tabs-border-bottom {
+    --editor-group-tab-height: 35px;
+    font-size: 12px !important;
+}
+
+
+.monaco-workbench .part.editor>.content .editor-group-container>.title .monaco-icon-label:before, .monaco-workbench .part.editor>.content .editor-group-container>.title .tabs-container>.tab .monaco-icon-label:before, .monaco-workbench .part.editor>.content .editor-group-container>.title .title-label a, .monaco-workbench .part.editor>.content .editor-group-container>.title .tabs-container>.tab .tab-label a, .monaco-workbench .part.editor>.content .editor-group-container>.title .title-label h2, .monaco-workbench .part.editor>.content .editor-group-container>.title .tabs-container>.tab .tab-label span {
+    font-size: 12px !important;
+}
+
+/* .split-view-view.visible {
+    top: 20px !important;
+} */
+
+.titlebar-center {
+    opacity: 0;
+    z-index: -999;
+}
+
+.titlebar-right{
+    opacity: 0;
+    z-index: -999;
+}
+
+
+.monaco-workbench .part.editor>.content .editor-group-container>.title .breadcrumbs-below-tabs .breadcrumbs-control .monaco-breadcrumb-item:before {
+    width: 8px;
+}
+
+
+
+.monaco-workbench .part.editor>.content .editor-group-container.active>.title .tabs-container>.tab.active {
+    border-radius: 7px 7px 0px 0px!important;
+}
+
+
+
+/* todo 1: fix explorer scrollbar size.*/
+
+/* todo 2: fix statusbar height */
+
+
+
+.monaco-workbench .monaco-list-row,
+.monaco-workbench .tabs-container,
+.monaco-workbench .statusbar,
+.monaco-workbench .sidebar,
+.monaco-workbench .activitybar,
+.monaco-workbench .part.titlebar {
+  font-size: 12px !important;
+}
+
+
+
+
+
+
+
+/* Minimal pill scrollbar — everywhere except the editor */
+
+/* Track */
+.monaco-workbench:not(.editor-instance) .scrollbar.vertical {
+  width: 8px !important;
+  background-color: transparent !important;
+}
+
+.monaco-workbench:not(.editor-instance) .scrollbar.horizontal {
+  height: 8px !important;
+  background-color: transparent !important;
+}
+
+/* Thumb */
+.monaco-workbench:not(.editor-instance) .scrollbar.vertical > .slider {
+  width: 4px !important;
+  margin-left: 2px !important;
+  border-radius: 4px !important;
+  background: #6d727d52 !important;
+  transition: background 0.2s ease, width 0.2s ease, margin 0.2s ease !important;
+}
+
+.monaco-workbench:not(.editor-instance) .scrollbar.horizontal > .slider {
+  height: 4px !important;
+  margin-top: 2px !important;
+  border-radius: 4px !important;
+  background: #6d727d52 !important;
+  transition: background 0.2s ease, height 0.2s ease, margin 0.2s ease !important;
+}
+
+/* Thumb on hover */
+.monaco-workbench:not(.editor-instance) .scrollbar.vertical:hover > .slider,
+.monaco-workbench:not(.editor-instance) .scrollbar.vertical > .slider:hover {
+  width: 6px !important;
+  margin-left: 1px !important;
+  background: #839ce236 !important;
+}
+
+.monaco-workbench:not(.editor-instance) .scrollbar.horizontal:hover > .slider,
+.monaco-workbench:not(.editor-instance) .scrollbar.horizontal > .slider:hover {
+  height: 6px !important;
+  margin-top: 1px !important;
+  background: #839ce236 !important;
+}
+
+/* Active (dragging) */
+.monaco-workbench:not(.editor-instance) .scrollbar.vertical > .slider.active {
+  background: #839ce24e !important;
+}
+
+.monaco-workbench:not(.editor-instance) .scrollbar.horizontal > .slider.active {
+  background: #839ce24e !important;
+}
+
+/* Exclude the editor explicitly — restore VSCode's default rendering */
+.monaco-workbench .editor-instance .scrollbar.vertical,
+.monaco-workbench .editor-instance .scrollbar.horizontal,
+.monaco-workbench .editor-instance .scrollbar.vertical > .slider,
+.monaco-workbench .editor-instance .scrollbar.horizontal > .slider {
+  all: revert !important;
+}
+
+
+
+/* ============================================ */
+/* Terminal (xterm.js) — minimal pill scrollbar */
+/* ============================================ */
+
+/* Hide the decoration overview ruler canvas */
+.xterm .xterm-decoration-overview-ruler,
+.xterm-decoration-overview-ruler {
+  display: none !important;
+}
+
+/* Hide xterm's invisible horizontal scrollbar (stray lines) */
+.xterm-scrollbar.xterm-invisible {
+  display: none !important;
+}
+
+/* Clean up borders/outlines on the terminal */
+.xterm .xterm-viewport,
+.xterm .xterm-screen,
+.xterm-scrollable-element {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Scrollbar track */
+.xterm .xterm-scrollbar {
+  width: 8px !important;
+  background: transparent !important;
+}
+
+/* Slider (thumb) — rest state */
+.xterm .xterm-slider {
+  width: 4px !important;
+  margin-left: 2px !important;
+  border-radius: 4px !important;
+  background: #6d727d52 !important;
+  transition: background 0.2s ease, width 0.2s ease, margin 0.2s ease !important;
+}
+
+/* Slider — hover */
+.xterm .xterm-scrollbar:hover .xterm-slider,
+.xterm .xterm-slider:hover {
+  width: 6px !important;
+  margin-left: 1px !important;
+  background: #839ce236 !important;
+}
+
+/* Slider — active (dragging) */
+.xterm .xterm-slider:active {
+  background: #839ce24e !important;
+}
+
+/* .xterm-screen {
+    padding-bottom: 15px !important;
+} */
+
+
+/* 
+
+.monaco-workbench .monaco-split-view2.vertical > .sash-container > .monaco-sash.horizontal {
+  background-color: #22252A !important;
+  height: 5px !important;
+} */
+
+
+.monaco-workbench
+  .monaco-split-view2.vertical
+  > .sash-container
+  > .monaco-sash.horizontal {
+  background-color: #22252A !important;
+  height: 5px !important;
+  z-index: 99 !important;
+}
+
+.monaco-workbench .part.editor > .content .editor-group-container.active > .title {
+  z-index: 99 !important;
+  position: relative !important;
+}
+
+
+.monaco-workbench .part.panel .monaco-split-view2 > .sash-container > .monaco-sash.vertical {
+  background-color: #292C33 !important;
+  width: 3px !important;
+  z-index: 1 !important;
+}
+
+
+
+/* === Explorer: fade long filenames at right edge === */
+
+/* === Explorer: fade long filenames at right edge === */
+
+/* Mask the label container — fade only text, not row hover bg */
+/* Mask the label container — fade only text, not row hover bg */
+/* Mask the label container — fade only text, not row hover bg
+.monaco-workbench .explorer-viewlet .monaco-list-row .monaco-icon-label > .monaco-icon-label-container {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    black 0%,
+    black calc(100% - 30px),
+    transparent calc(100% - 3px)
+  ) !important;
+  mask-image: linear-gradient(
+    to right,
+    black 0%,
+    black calc(100% - 30px),
+    transparent calc(100% - 3px)
+  ) !important;
+  overflow: visible !important;
+}
+
+
+/* Kill ellipsis on all inner label elements */
+/* .monaco-workbench .explorer-viewlet .monaco-list-row .label-name,
+.monaco-workbench .explorer-viewlet .monaco-list-row .monaco-icon-label,
+.monaco-workbench .explorer-viewlet .monaco-list-row .monaco-icon-label-container,
+.monaco-workbench .explorer-viewlet .monaco-list-row .monaco-icon-name-container,
+.monaco-workbench .explorer-viewlet .monaco-list-row .label-container {
+  max-width: none !important;
+  text-overflow: clip !important;
+  overflow: visible !important;
+  white-space: nowrap !important;
+} */
+
+/* Kill VSCode's built-in gradient fade pseudo-elements */
+/* .monaco-workbench .explorer-viewlet .monaco-list-row .monaco-icon-label-container::after,
+.monaco-workbench .explorer-viewlet .monaco-list-row .label-name::after {
+  display: none !important;
+  background: transparent !important;
+}
+
+ */

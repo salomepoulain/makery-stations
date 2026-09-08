@@ -1,0 +1,32 @@
+adapter_name: ars_pipeline.py
+adapter_version: 1.0.0
+generated_at: '2026-09-07T16:22:10Z'
+rejected:
+- detail: Preprint only.
+  raw: '"Coordinated Sniper Cohorts on Pump.fun" (arXiv:2607.02795v2).'
+  reason: preprint_in_press_no_artifact
+  source: '"Coordinated Sniper Cohorts on Pump.fun" (arXiv:2607.02795v2).'
+- detail: Cited as a methodology reference, not a strategy result; excluded from primary evidence matrix.
+  raw: Arian, H., Norouzi Mobarekeh, D., & Seco, L. (2024).
+  reason: methodology_only_not_strategy_result
+  source: Arian, H., Norouzi Mobarekeh, D., & Seco, L. (2024).
+- detail: ETH/BTC/SOL scope but the LLM-based trading agent operates on established assets. No Solana-memecoin-launch mapping.
+  raw: CryptoTrade (arXiv:2407.09546).
+  reason: stage1_no_solana_mapping_or_gray_literature
+  source: CryptoTrade (arXiv:2407.09546).
+- detail: 'Gated out: reproducibility. The chronological robustness check shows degraded performance.'
+  raw: Huynh et al. 2025 (WWW '25) — Serial scammers.
+  reason: stage2_gate_failure
+  source: Huynh et al. 2025 (WWW '25) — Serial scammers.
+- detail: Hierarchical multi-agent framework on ETH/BTC portfolios. No Solana-memecoin mapping.
+  raw: Multi-Agent System for Crypto Portfolio Management (arXiv:2501.00826).
+  reason: stage1_no_solana_mapping_or_gray_literature
+  source: Multi-Agent System for Crypto Portfolio Management (arXiv:2501.00826).
+- detail: Industry analytics platform on Solana MEV. Gray literature, not peer-reviewed.
+  raw: sandwiched.me (May 2025).
+  reason: stage1_no_solana_mapping_or_gray_literature
+  source: sandwiched.me (May 2025).
+summary:
+  total_accepted: 4
+  total_input: 11
+  total_rejected: 6

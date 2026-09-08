@@ -1,0 +1,5 @@
+.git
+.makery
+node_modules
+.venv
+.docker/.cache

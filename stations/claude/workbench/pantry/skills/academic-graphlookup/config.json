@@ -1,0 +1,15 @@
+{
+  "max_hops": 2,
+  "fanout_top_n": 15,
+  "node_budget": 300,
+  "date_floor": 2018,
+  "corpus_dir": "docs/academic-research/corpus",
+  "passport_path": "docs/academic-research/corpus/passport.yaml",
+  "research_question_path": "docs/academic-research/phase1_revised_v2.md",
+  "db_path": "docs/academic-research/corpus/citegraph.sqlite",
+  "openrouter_models": [
+    "deepseek/deepseek-r1:free",
+    "qwen/qwen-qwq:free"
+  ],
+  "batch_size": 8
+}

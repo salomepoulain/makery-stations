@@ -1,0 +1,17 @@
+services:
+  dev:
+    build:
+      context: ..
+      dockerfile: .docker/Dockerfile
+    image: makery-dev-shell:local
+    working_dir: /workspace
+    entrypoint: ["/workspace/.docker/entrypoint.sh"]
+    command: ["/usr/bin/zsh", "-l"]
+    stdin_open: true
+    tty: true
+    volumes:
+      - ../:/workspace
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      GITHUB_TOKEN: ${GITHUB_TOKEN:-}
