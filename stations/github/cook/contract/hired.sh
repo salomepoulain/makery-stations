@@ -18,7 +18,10 @@ GITIGNORE="$PROJECT_ROOT/.gitignore"
 
 SAY "Setting up $COOK_NAME station"
 
-# --- 1. Build .gitignore from all stations' countertop + dishsoap ---
+# --- 1. Build .gitignore from all stations' countertop ---
+# .countertop is the sole source of truth - station authors write it by
+# hand (including duplicating anything from .contraband/.dishsoap that
+# also needs gitignoring), no automatic union.
 # Only fresh-write on first run; if it already exists, append to preserve custom entries
 if [ ! -f "$GITIGNORE" ]; then
     > "$GITIGNORE"
@@ -36,7 +39,6 @@ collect_gitignore() {
 collect_gitignore "$KITCHEN_DIR/headchef/pockets/.countertop"
 for station_dir in "$KITCHEN_DIR/stations"/*/; do
     collect_gitignore "${station_dir}workbench/.countertop"
-    collect_gitignore "${station_dir}workbench/.dishsoap"
 done
 
 SAY "Built .gitignore"
