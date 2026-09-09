@@ -90,7 +90,7 @@ short backoff, before giving up (exit `3`).
 
 ## Mechanism (for reference, don't reimplement)
 
-Same trick as `.makery/kitchen/stations/claude/cook/recipes/commit-yolo.sh`
+Same trick as `.makery/kitchen/stations/claude/cook/skills/commit-yolo.sh`
 and `academic-graphlookup/scripts/classify_relevance.py`: write a temp
 `.claude/settings.local.json` (model + `ANTHROPIC_BASE_URL` +
 `ANTHROPIC_AUTH_TOKEN` swapped to OpenRouter, plus the permission baseline
