@@ -14,6 +14,5 @@ menu::
 
 # Add your recipes below:
 
-# models: Switch between Anthropic and OpenRouter providers
 example:
-	@bash $(STATION_DIR)cook/recipes/example.sh
+	@bash $(STATION_DIR)cook/skills/example.sh

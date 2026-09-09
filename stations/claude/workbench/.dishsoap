@@ -3,3 +3,5 @@
 # ============================================================================
 # List files or folders that pile up while this cook is working.
 # When the Head Chef calls `bake germs`, everything listed here is deleted.
+
+.claude-free

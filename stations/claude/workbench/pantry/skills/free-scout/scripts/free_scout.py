@@ -4,7 +4,7 @@ spawning a real Sonnet subagent, to save Claude Pro usage-limit quota on
 small, well-scoped, read-only tasks.
 
 Reuses the mechanism in
-.makery/kitchen/stations/claude/cook/recipes/commit-yolo.sh and
+.makery/kitchen/stations/claude/cook/skills/commit-yolo.sh and
 academic-graphlookup/scripts/classify_relevance.py: point the Claude CLI at
 OpenRouter via a temporary settings.local.json (model + ANTHROPIC_BASE_URL +
 ANTHROPIC_AUTH_TOKEN) and run `claude -p` headless. Unlike graphlookup (which

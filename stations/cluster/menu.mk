@@ -18,12 +18,12 @@ menu::
 
 # shell: install/update dotfiles and shell environment
 shell:
-	@bash $(STATION_DIR)cook/recipes/shell.sh
+	@bash $(STATION_DIR)cook/skills/shell.sh
 
 # sync: continuous two-way __sync__/ sync with a remote host via Mutagen
 sync:
-	@bash $(STATION_DIR)cook/recipes/sync.sh $(filter-out sync call,$(MAKECMDGOALS))
+	@bash $(STATION_DIR)cook/skills/sync.sh $(filter-out sync call,$(MAKECMDGOALS))
 
 # shady-sync: continuous two-way .shadow/ sync with a remote host via Mutagen
 shady-sync:
-	@bash $(STATION_DIR)cook/recipes/shady-sync.sh $(filter-out shady-sync call,$(MAKECMDGOALS))
+	@bash $(STATION_DIR)cook/skills/shady-sync.sh $(filter-out shady-sync call,$(MAKECMDGOALS))

@@ -4,7 +4,7 @@ citegraph.sqlite, (a) how relevant it is to the project's research question
 and (b) which strategy family it belongs to.
 
 Reuses the mechanism in
-.makery/kitchen/stations/claude/cook/recipes/commit-yolo.sh: point the
+.makery/kitchen/stations/claude/cook/skills/commit-yolo.sh: point the
 Claude CLI at OpenRouter via a temporary settings.local.json
 (ANTHROPIC_BASE_URL + ANTHROPIC_AUTH_TOKEN) and run `claude -p` headless.
 Papers are classified in batches (`batch_size` in config.json, default 8),

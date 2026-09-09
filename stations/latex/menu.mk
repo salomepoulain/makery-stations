@@ -16,4 +16,4 @@ menu::
 
 # models: Switch between Anthropic and OpenRouter providers
 report:
-	@bash $(STATION_DIR)cook/recipes/report.sh
+	@bash $(STATION_DIR)cook/skills/report.sh

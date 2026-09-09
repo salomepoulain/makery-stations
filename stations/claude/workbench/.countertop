@@ -1,0 +1,9 @@
+# ============================================================================
+#  LINE COOK COUNTERTOP: KITCHEN-ONLY (.gitignore entries)
+# ============================================================================
+# The files and folders in here define part of the line cooks kitchen countertop
+# This includes everything that should NOT get shipped out of the kitchen (github)
+# A good dish is a clean dish. Mess and germs should stay in the kitchen,
+# Therefore, add the .dishsoap entries in here as well.
+
+CLAUDE.local.md.bak.*
