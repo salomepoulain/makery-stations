@@ -70,9 +70,9 @@ The **claude station** is a station that integrates Claude Code (Claude's CLI en
 ### Workbench
 The **workbench** is the execution environment for the station. It's where recipes run and where temporary files live.
 
-- `.contraband` — Files/patterns that get moved into `__stash__` and symlinked back when the project "goes shady" (e.g. `CLAUDE.local.md`)
-- `.countertop` — Files/patterns that just get gitignored, never stashed (e.g. local backups)
-- `.dishsoap` — Files/directories to clean up after each task execution (`bake germs`); also unioned into `.gitignore`
+- `.contraband` — Files/patterns that get moved into `__stash__` and symlinked back when the project "goes shady" (e.g. `CLAUDE.local.md`). Everything here must also be listed in `.countertop`.
+- `.countertop` — The sole source of truth for `.gitignore`, written by hand. Duplicate in anything from `.contraband` or `.dishsoap` that also needs gitignoring - no automatic union, on purpose.
+- `.dishsoap` — Files/directories to clean up after each task execution (`bake germs`)
 - `.tools` — System-level commands that must be installed for this station to work
 
 ### Pantry
@@ -150,7 +150,7 @@ Rebuild CLAUDE.md with: `bake call s=claude d=prompts`
 | `CLAUDE.md` | Generated instructions for Claude (regenerate after changes) |
 | `.contraband` | Shady-stash patterns (moved into `__stash__`, symlinked back) |
 | `.countertop` | Gitignore-only patterns (never stashed) |
-| `.dishsoap` | Cleanup patterns (also unioned into `.gitignore`) |
+| `.dishsoap` | Cleanup patterns |
 | `multi-makery` repo | Core makery system (referenced via sync-template.sh) |
 
 ## Common Tasks
