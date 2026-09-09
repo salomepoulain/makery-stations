@@ -11,6 +11,7 @@ menu::
 	@bash -c 'source "$(STATION_DIR)cook/personality.sh" && STARTER "$$COOK_NAME'"'"'s Menu" && \
 		ITEM "shell" "Install/update dotfiles and shell: chezmoi, oh-my-zsh, powerlevel10k (idempotent)" && \
 		ITEM "sync [host]" "Continuously sync this project'"'"'s __sync__/ folder (drag-and-drop) with a remote host via Mutagen" && \
+		ITEM "shady-sync [host]" "Continuously sync this project'"'"'s .shadow/ (everything bake shady stashed) with a remote host via Mutagen" && \
 		LINE'
 
 # Add your recipes below:
@@ -22,3 +23,7 @@ shell:
 # sync: continuous two-way __sync__/ sync with a remote host via Mutagen
 sync:
 	@bash $(STATION_DIR)cook/recipes/sync.sh $(filter-out sync call,$(MAKECMDGOALS))
+
+# shady-sync: continuous two-way .shadow/ sync with a remote host via Mutagen
+shady-sync:
+	@bash $(STATION_DIR)cook/recipes/shady-sync.sh $(filter-out shady-sync call,$(MAKECMDGOALS))

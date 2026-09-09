@@ -1,5 +1,6 @@
 
 ☑ mutagen sync -> cook/recipes/sync.sh (bake call s=cluster d=sync [host]). NOT via .shadow/shady - plain drag-and-drop __sync__/ folder at project root, synced to ~/projects/<name>/__sync__/ on the remote.
+☑ mutagen sync of .shadow/ too, opt-in separately -> cook/recipes/shady-sync.sh (bake call s=cluster d=shady-sync [host]). Syncs whatever bake shady already stashed, not just __sync__/ - can be much bigger (e.g. sol-platform's data/ is 850MB), so kept as its own explicit recipe rather than folded into sync.sh.
 
 ☐ how to make sure all this is installed? and where?
 zsh
