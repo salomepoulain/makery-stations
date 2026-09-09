@@ -36,7 +36,7 @@ collect_gitignore() {
     done < "$file"
 }
 
-collect_gitignore "$KITCHEN_DIR/headchef/pockets/.countertop"
+collect_gitignore "$KITCHEN_DIR/.kitchen"
 for station_dir in "$KITCHEN_DIR/stations"/*/; do
     collect_gitignore "${station_dir}workbench/.countertop"
 done
