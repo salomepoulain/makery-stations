@@ -1,5 +1,5 @@
 
-☐ if bake shady, turn that into mutagen 
+☑ mutagen sync -> cook/recipes/sync.sh (bake call s=cluster d=sync [host]). NOT via .shadow/shady - plain drag-and-drop __sync__/ folder at project root, synced to ~/projects/<name>/__sync__/ on the remote.
 
 ☐ how to make sure all this is installed? and where?
 zsh

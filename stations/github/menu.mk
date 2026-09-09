@@ -10,6 +10,7 @@ STATION_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
 menu::
 	@bash -c 'source "$(STATION_DIR)cook/personality.sh" && STARTER "$$COOK_NAME'"'"'s Menu" && \
 		ITEM "repo" "Create private GitHub repo, set remote, push initial commit" && \
+		ITEM "match" "Find a repo named like this folder under your account, clone/pull it in" && \
 		ITEM "public" "Make this repo public (asks for confirmation)" && \
 		ITEM "private" "Make this repo private (asks for confirmation)" && \
 		ITEM "gitignore" "Refresh .gitignore from all stations'"'"' contraband" && \
@@ -19,6 +20,9 @@ menu::
 
 repo:
 	@bash $(STATION_DIR)cook/recipes/repo.sh
+
+match:
+	@bash $(STATION_DIR)cook/recipes/match.sh
 
 public:
 	@bash $(STATION_DIR)cook/recipes/public.sh

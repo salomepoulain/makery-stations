@@ -9,11 +9,16 @@ STATION_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
 
 menu::
 	@bash -c 'source "$(STATION_DIR)cook/personality.sh" && STARTER "$$COOK_NAME'"'"'s Menu" && \
-		ITEM "setup" "Re-run setup: chezmoi, oh-my-zsh, powerlevel10k, apply dotfiles (idempotent)" && \
+		ITEM "shell" "Install/update dotfiles and shell: chezmoi, oh-my-zsh, powerlevel10k (idempotent)" && \
+		ITEM "sync [host]" "Continuously sync this project'"'"'s __sync__/ folder (drag-and-drop) with a remote host via Mutagen" && \
 		LINE'
 
 # Add your recipes below:
 
-# setup: re-run the same idempotent setup hired.sh runs on first hire
-setup:
-	@bash $(STATION_DIR)cook/contract/hired.sh
+# shell: install/update dotfiles and shell environment
+shell:
+	@bash $(STATION_DIR)cook/recipes/shell.sh
+
+# sync: continuous two-way __sync__/ sync with a remote host via Mutagen
+sync:
+	@bash $(STATION_DIR)cook/recipes/sync.sh $(filter-out sync call,$(MAKECMDGOALS))
