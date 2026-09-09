@@ -71,7 +71,7 @@ SAY "Docker station init complete"
 # Automatically open the configured shell on first hire when interactive.
 if [ -t 0 ] && [ -t 1 ] && [ "${BAKE_DOCKER_NO_AUTO_SHELL:-0}" != "1" ]; then
 	SAY "Launching docker shell with your .docker/shell config"
-	exec "$STATION_DIR/cook/recipes/shell.sh"
+	exec "$STATION_DIR/cook/skills/shell.sh"
 fi
 
 SAY "Auto-shell skipped (non-interactive or BAKE_DOCKER_NO_AUTO_SHELL=1)"

@@ -18,13 +18,13 @@ GITIGNORE="$PROJECT_ROOT/.gitignore"
 
 SAY "Setting up $COOK_NAME station"
 
-# --- 1. Build .gitignore from all stations' contraband ---
+# --- 1. Build .gitignore from all stations' countertop + dishsoap ---
 # Only fresh-write on first run; if it already exists, append to preserve custom entries
 if [ ! -f "$GITIGNORE" ]; then
     > "$GITIGNORE"
 fi
 
-collect_contraband() {
+collect_gitignore() {
     local file="$1"
     [[ -f "$file" ]] || return
     while IFS= read -r line || [[ -n "$line" ]]; do
@@ -33,9 +33,10 @@ collect_contraband() {
     done < "$file"
 }
 
-collect_contraband "$KITCHEN_DIR/headchef/pockets/.contraband"
-for contraband in "$KITCHEN_DIR/stations"/*/workbench/.contraband; do
-    collect_contraband "$contraband"
+collect_gitignore "$KITCHEN_DIR/headchef/pockets/.countertop"
+for station_dir in "$KITCHEN_DIR/stations"/*/; do
+    collect_gitignore "${station_dir}workbench/.countertop"
+    collect_gitignore "${station_dir}workbench/.dishsoap"
 done
 
 SAY "Built .gitignore"

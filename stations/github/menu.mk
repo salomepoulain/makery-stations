@@ -19,16 +19,16 @@ menu::
 # Add your recipes below:
 
 repo:
-	@bash $(STATION_DIR)cook/recipes/repo.sh
+	@bash $(STATION_DIR)cook/skills/repo.sh
 
 match:
-	@bash $(STATION_DIR)cook/recipes/match.sh
+	@bash $(STATION_DIR)cook/skills/match.sh
 
 public:
-	@bash $(STATION_DIR)cook/recipes/public.sh
+	@bash $(STATION_DIR)cook/skills/public.sh
 
 private:
-	@bash $(STATION_DIR)cook/recipes/private.sh
+	@bash $(STATION_DIR)cook/skills/private.sh
 
 gitignore:
-	@bash $(STATION_DIR)cook/recipes/gitignore.sh
+	@bash $(STATION_DIR)cook/skills/gitignore.sh

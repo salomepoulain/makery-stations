@@ -22,10 +22,12 @@ makery-stations/
 │       ├── cook/                # Station recipes and configuration
 │       │   ├── personality.sh   # Station personality/metadata
 │       │   ├── contract/        # Lifecycle hooks (hired/fired)
-│       │   └── recipes/         # Executable recipes (tasks)
+│       │   └── skills/          # Executable skills (tasks)
 │       └── workbench/           # Execution environment
-│           ├── .contraband      # Files excluded from context
-│           ├── .dishsoap        # Files/dirs to clean up after tasks
+│           ├── .contraband      # Shady-stash list (moved into __stash__, symlinked back)
+│           ├── .countertop      # Gitignore-only list (stays local, never stashed)
+│           ├── .dishsoap        # Files/dirs to clean up after tasks (bake germs)
+│           ├── .tools           # System-tool dependencies checked before hiring
 │           └── pantry/          # Shared configurations & knowledge
 │               ├── settings/    # Configuration files (JSON, merged into settings.local.json)
 │               ├── prompts/     # CLAUDE.md modular sections
@@ -55,7 +57,7 @@ The **claude station** is a station that integrates Claude Code (Claude's CLI en
 | `cook/personality.sh` | Station metadata (name, description, version) |
 | `cook/contract/hired.sh` | Runs when station is initialized |
 | `cook/contract/fired.sh` | Runs when station is torn down |
-| `cook/recipes/*.sh` | Individual task scripts |
+| `cook/skills/*.sh` | Individual task scripts |
 | `workbench/pantry/settings/` | Persistent configuration (permissions, sandbox, statusline, mcp) |
 | `workbench/pantry/prompts/` | CLAUDE.md sections (modular instructions) |
 | `workbench/pantry/docs/` | Knowledge base for Claude (this folder) |
@@ -68,8 +70,10 @@ The **claude station** is a station that integrates Claude Code (Claude's CLI en
 ### Workbench
 The **workbench** is the execution environment for the station. It's where recipes run and where temporary files live.
 
-- `.contraband` — List of files/patterns to exclude from context (e.g., node_modules, .env, .claude-free)
-- `.dishsoap` — Files/directories to clean up after each task execution
+- `.contraband` — Files/patterns that get moved into `__stash__` and symlinked back when the project "goes shady" (e.g. `CLAUDE.local.md`)
+- `.countertop` — Files/patterns that just get gitignored, never stashed (e.g. local backups)
+- `.dishsoap` — Files/directories to clean up after each task execution (`bake germs`); also unioned into `.gitignore`
+- `.tools` — System-level commands that must be installed for this station to work
 
 ### Pantry
 The **pantry** is the persistent knowledge store for the station. It contains:
@@ -88,7 +92,7 @@ When Claude executes in this workbench, it has access to:
 
 1. **CLAUDE.md** — Generated from pantry/prompts sections; defines behavioral guidelines
 2. **Docs folder** — This knowledge base; provides context about the makery system
-3. **Project files** — All files in the workbench (excluding contraband)
+3. **Project files** — All files in the workbench
 
 The docs folder is designed to be **copied and pasted** into Claude prompts so Claude always understands the full architectural context of the project.
 
@@ -97,27 +101,30 @@ The docs folder is designed to be **copied and pasted** into Claude prompts so C
 ### Station Names
 Stations follow the pattern of simple, lowercase names: `claude`, `git`, etc.
 
-### Recipes (Tasks)
-Each recipe is a shell script in `cook/recipes/` that:
+### Skills (Tasks)
+Each skill is a shell script in `cook/skills/` that:
 - Is executable (`chmod +x`)
 - Starts with a shebang (`#!/usr/bin/env bash`)
 - Can accept arguments
 - Should log its progress to stdout
 
-### Contraband (Exclusions)
-Files matching patterns in `.contraband` are excluded from Claude's context. Common examples:
-- Build artifacts: `node_modules/`, `dist/`, `*.o`
-- Secrets: `.env`, `*.key`, `credentials*`
-- Large/binary files
-- Generated files that shouldn't be edited
+### Contraband (shady-stash)
+Files matching patterns in `.contraband` get moved into `__stash__` (outside the repo) and
+symlinked back when the project goes shady, so they travel with you across machines without
+ever being tracked by git. Common examples:
+- Personal instructions: `CLAUDE.local.md`
+- Local settings: `settings.local.json`, `.claude`
+
+Anything that should just be gitignored and left alone (build artifacts, backups) belongs in
+`.countertop` instead - see below.
 
 ## Common Patterns
 
 ### Running Recipes
 Recipes are typically invoked via `make` or directly:
 ```bash
-bake call s=claude d=recipes   # List available recipes
-./stations/claude/cook/recipes/skills.sh  # Run a specific recipe
+bake call s=claude d=skills   # List available skills
+./stations/claude/cook/skills/skills.sh  # Run a specific skill
 ```
 
 ### Adding Knowledge
@@ -141,17 +148,18 @@ Rebuild CLAUDE.md with: `bake call s=claude d=prompts`
 |------|---------|
 | `stations/claude/menu.mk` | Station menu and available commands |
 | `CLAUDE.md` | Generated instructions for Claude (regenerate after changes) |
-| `.contraband` | Context exclusion patterns |
-| `.dishsoap` | Cleanup patterns |
+| `.contraband` | Shady-stash patterns (moved into `__stash__`, symlinked back) |
+| `.countertop` | Gitignore-only patterns (never stashed) |
+| `.dishsoap` | Cleanup patterns (also unioned into `.gitignore`) |
 | `multi-makery` repo | Core makery system (referenced via sync-template.sh) |
 
 ## Common Tasks
 
-### Add a New Recipe
-1. Create `stations/claude/cook/recipes/my-recipe.sh`
+### Add a New Skill
+1. Create `stations/claude/cook/skills/my-skill.sh`
 2. Make it executable: `chmod +x`
 3. Add entry to `menu.mk` if needed
-4. Recipe is now available
+4. Skill is now available
 
 ### Update Claude's Instructions
 1. Edit relevant file in `stations/claude/workbench/pantry/prompts/`
@@ -167,7 +175,7 @@ Rebuild CLAUDE.md with: `bake call s=claude d=prompts`
 
 - **What is this?** A makery-based project with modular stations, currently featuring Claude integration
 - **Where is Claude?** `stations/claude/`
-- **Where are recipes?** `stations/claude/cook/recipes/`
+- **Where are skills?** `stations/claude/cook/skills/`
 - **Where is configuration?** `stations/claude/workbench/pantry/settings/`
 - **Where is knowledge?** `stations/claude/workbench/pantry/docs/`
 - **What's the entry point?** `stations/claude/menu.mk`

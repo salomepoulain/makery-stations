@@ -36,7 +36,7 @@ cp -r "$PANTRY_DIR/docs" "$CLAUDE_DIR_PATH"
 
 # Deploy skills, commands, and the statusline script (same logic as
 # `bake call s=claude d=skills`, callable again standalone later)
-"$STATION_DIR/cook/recipes/skills.sh"
+"$STATION_DIR/cook/skills/skills.sh"
 
 
 # Merge JSON plugins from pantry/settings into settings.local.json

@@ -19,16 +19,16 @@ menu::
 # Add your recipes below:
 
 shady:
-	@bash $(STATION_DIR)cook/recipes/shady.sh
+	@bash $(STATION_DIR)cook/skills/shady.sh
 
 perma:
-	@bash $(STATION_DIR)cook/recipes/perma.sh
+	@bash $(STATION_DIR)cook/skills/perma.sh
 
 permanent:
-	@bash $(STATION_DIR)cook/recipes/permanent.sh
+	@bash $(STATION_DIR)cook/skills/permanent.sh
 
 decouple:
-	@bash $(STATION_DIR)cook/recipes/decouple.sh
+	@bash $(STATION_DIR)cook/skills/decouple.sh
 
 undo:
-	@bash $(STATION_DIR)cook/recipes/undo.sh
+	@bash $(STATION_DIR)cook/skills/undo.sh

@@ -18,15 +18,15 @@ menu::
 # Add your recipes below:
 
 build:
-	@bash $(STATION_DIR)cook/recipes/build.sh
+	@bash $(STATION_DIR)cook/skills/build.sh
 
 rebuild:
-	@bash $(STATION_DIR)cook/recipes/rebuild.sh
+	@bash $(STATION_DIR)cook/skills/rebuild.sh
 
 run:
-	@bash $(STATION_DIR)cook/recipes/shell.sh
+	@bash $(STATION_DIR)cook/skills/shell.sh
 
 shell: run
 
 clean:
-	@bash $(STATION_DIR)cook/recipes/clean.sh
+	@bash $(STATION_DIR)cook/skills/clean.sh

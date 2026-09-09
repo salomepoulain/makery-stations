@@ -17,7 +17,7 @@ fi
 SAY "Opening dev shell from compose service 'dev'"
 if ! docker image inspect "$IMAGE_TAG" >/dev/null 2>&1; then
 	SAY "Image $IMAGE_TAG not found; building first"
-	bash "$STATION_DIR/cook/recipes/build.sh"
+	bash "$STATION_DIR/cook/skills/build.sh"
 fi
 
 exec docker compose -f "$COMPOSE_FILE" run --rm dev
