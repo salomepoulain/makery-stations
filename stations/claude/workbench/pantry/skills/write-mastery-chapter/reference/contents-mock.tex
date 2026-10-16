@@ -1,0 +1,70 @@
+\documentclass[11pt]{article}
+\usepackage[left=1.25in,right=1.25in,top=0.9in,bottom=0.8in]{geometry}
+\usepackage{amsmath,xcolor,tikz,pdfrender,hyperref}
+\hypersetup{colorlinks=false,pdfborder={0 0 0}}
+\definecolor{chcolor2}{RGB}{204,85,0}\colorlet{chapcolor}{chcolor2}
+\definecolor{dblue}{RGB}{20,50,140}
+\pagestyle{empty}\setlength{\parindent}{0pt}
+\newcommand{\thick}{\pdfrender{TextRenderingMode=FillStroke,LineWidth=0.45pt}}
+\newcommand{\cO}{teal!60!black}\newcommand{\cT}{orange!85!red}\newcommand{\cD}{dblue}\newcommand{\cV}{magenta!85!red!90!white}
+\definecolor{vpink}{RGB}{233,30,140}\renewcommand{\cV}{vpink}
+\newcommand{\cE}{green!45!black}\newcommand{\cC}{red!70!black}\newcommand{\cR}{violet!70!black}\newcommand{\cP}{yellow!40!orange!85!black}
+\newsavebox{\hbx}
+\newcommand{\behindband}[5]{\edef\bandt{\the\dimexpr\ht\hbx+#5\relax}\edef\bandb{\the\dimexpr-\dp\hbx-#5\relax}%
+\begin{tikzpicture}[overlay]\fill[#1,rounded corners=#4](#2,\bandb)rectangle(#3,\bandt);\end{tikzpicture}\usebox{\hbx}}
+\newcommand{\secband}[1]{\par\vspace{6pt}\noindent\sbox{\hbx}{\begin{minipage}[t]{\linewidth}{\Large\bfseries\color{chapcolor}\thick #1}\end{minipage}}%
+\edef\bandxl{\the\dimexpr-1in-\oddsidemargin-20pt\relax}\edef\bandxr{\the\dimexpr\textwidth+10pt\relax}%
+\behindband{chapcolor!22}{\bandxl}{\bandxr}{9pt}{7pt}\par\vspace{16pt}}
+% a dot: circle, colour by exercise type, number inside, a link to the exercise
+\newcommand{\dcfill}[2]{\hyperlink{ex:#2}{\tikz[baseline=-0.75ex]\node[circle,fill=#1,text=white,inner sep=0pt,minimum size=\dotsize,font=\bfseries\fontsize{\dotfont}{\dotfont}\selectfont]{#2};}}
+\newcommand{\dchollow}[2]{\hyperlink{ex:#2}{\tikz[baseline=-0.75ex]\node[circle,draw=#1,line width=0.9pt,text=black,inner sep=0pt,minimum size=\dotsize,font=\bfseries\fontsize{\dotfont}{\dotfont}\selectfont]{#2};}}
+\newcommand{\dotsize}{14pt}\newcommand{\dotfont}{6.4pt}
+\newcommand{\dcgap}{G}
+\newcommand{\dcrow}[2]{{\raggedright\foreach \g in {#2}{\mbox{\foreach \t/\k in \g{\edef\dctmp{\noexpand\csname #1\noexpand\endcsname{\csname c\t\endcsname}{\k}}\dctmp\hspace{1.6pt}}}\hspace{7pt}}\par}}
+\newcommand{\entry}[2]{\par\vspace{9pt}\noindent{\Large\bfseries\color{chapcolor}#1}\hfill{\Large\bfseries\color{chapcolor}#2}\par\vspace{4pt}}
+% link targets, so the dots really jump somewhere
+\newcommand{\targets}{\clearpage\section*{Exercise pages (link targets)}\foreach \n in {1,...,140}{\hypertarget{ex:\n}{}Exercise \n\quad}}
+
+\makeatletter\newcommand{\dcshow}[1]{\@ifundefined{dcs@#1}{#1}{\csname dcs@#1\endcsname}}\makeatother
+\expandafter\def\csname dcs@S1\endcsname{\S1}\expandafter\def\csname dcs@S2\endcsname{\S2}\expandafter\def\csname dcs@S3\endcsname{\S3}\expandafter\def\csname dcs@S4\endcsname{\S4}\expandafter\def\csname dcs@S5\endcsname{\S5}\expandafter\def\csname dcs@S6\endcsname{\S6}
+\newdimen\gw \newdimen\cxx
+\newcommand{\dctint}{35}\newcommand{\dcLw}{13pt}\newcommand{\dcMw}{17pt}\newcommand{\cQ}{gray!60!black}\newcommand{\cZ}{chapcolor}\newcommand{\dcL}{L}\newcommand{\dcM}{M}
+\definecolor{thyletter}{RGB}{255,232,120}\newcommand{\dcTF}{chapcolor}\newcommand{\dcTN}{white}
+\newcommand{\cellw}[1]{\ifnum#1>99 17pt\else 13pt\fi}
+% one Theory block = one long pill: first a cell with the Theory letter, then one cell per exercise. Every cell is a link.
+\newcommand{\pillgroup}[1]{\global\gw=0pt%
+\foreach \t/\k in #1{\ifx\t\dcL\global\advance\gw by \dcLw\else\ifx\t\dcM\global\advance\gw by \dcMw\else\ifnum\k>99 \global\advance\gw by 17pt\else\global\advance\gw by 13pt\fi\fi\fi}%
+\tikz[baseline=-2.25pt]{\clip[rounded corners=7pt](0pt,-7pt)rectangle(\gw,7pt);\global\cxx=0pt
+\foreach \t/\k in #1{\ifx\t\dcL\def\thy{1}\else\ifx\t\dcM\def\thy{1}\else\def\thy{0}\fi\fi
+\if\thy1\colorlet{cellcol}{\dcTF}\colorlet{cellnum}{\dcTN}\def\lnk{thy:\k}\else\edef\dccol{\csname c\t\endcsname}\colorlet{cellcol}{\dccol!\dctint}\colorlet{cellnum}{\dccol!90!black}\def\lnk{ex:\k}\fi
+\edef\xa{\the\cxx}\edef\cwd{\ifx\t\dcL\dcLw\else\ifx\t\dcM\dcMw\else\cellw{\k}\fi\fi}\edef\xm{\the\dimexpr\cxx+\cwd/2\relax}\edef\xb{\the\dimexpr\cxx+\cwd\relax}%
+\fill[cellcol](\xa,-7pt)rectangle(\xb,7pt);\draw[white,line width=0.9pt](\xb,-7pt)--(\xb,7pt);
+\node[inner sep=0pt,text=cellnum,font=\bfseries\fontsize{6.8}{6.8}\selectfont] at (\xm,0pt){\hyperlink{\lnk}{\hbox to \cwd{\hss\vrule height 9.25pt depth 4.75pt width 0pt\dcshow{\k}\hss}}};
+\global\cxx=\xb}}}
+\newcommand{\dcrowc}[1]{{\raggedright\foreach \g in {#1}{\mbox{\pillgroup{\g}}\hspace{1.5pt}}\par}}
+\renewcommand{\targets}{\clearpage\section*{Link targets}\foreach \n in {1,...,140}{\hypertarget{ex:\n}{}Exercise \n\quad}\par\foreach \l in {G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,AA,AB,AC,AD,AE,AF,AG,AH,AI}{\hypertarget{thy:\l}{}Theory \l\quad}}
+\begin{document}
+\renewcommand{\dcTF}{chapcolor}\renewcommand{\dcTN}{white}
+\noindent{\sffamily\small\color{black!60}Theory letter in white. The orienting cell (O) sits after the Theory cell. The Diagnostic check shows only numbers, in the colour of the page number.}\par\vspace{8pt}
+\secband{Contents}
+\entry{Legend}{1}
+\entry{Prior knowledge}{3}
+\noindent\dcrowc{{L/A,P/1,P/2,P/3,P/4},{L/B,P/5,P/6,P/7,P/8},{L/C,P/9,P/10,P/11,P/12},{L/D,P/13,P/14,P/15},{L/E,P/16,P/17,P/18},{L/F,P/19,P/20,P/21,P/22}}
+\entry{\S1: Discrete distributions and expectation}{4}
+\noindent\dcrowc{{L/G,O/1,T/2,D/3,D/4,D/5,D/6,V/7,E/8,C/9,R/10},{L/H,T/11,D/12,D/13,D/14,V/15,E/16,C/17,R/18},{L/I,O/19,T/20,D/21,D/22,D/23,V/24,E/25,C/26,R/27},{L/J,O/28,T/29,D/30,D/31,D/32,D/33,V/34,E/35,C/36,R/37},{L/K,T/38,D/39,D/40,D/41,D/42,V/43,E/44,C/45,R/46}}
+\entry{\S2: Continuous distributions}{30}
+\noindent\dcrowc{{L/L,O/47,T/48,D/49,D/50,D/51,D/52,V/53,E/54,C/55,R/56},{L/M,O/57,T/58,D/59,D/60,D/61,V/62,E/63,C/64,R/65},{L/N,T/66,D/67,D/68,D/69,D/70,V/71,E/72,C/73,R/74},{L/O,T/75,D/76,D/77,D/78,D/79,V/80,E/81,C/82,R/83}}
+\entry{\S3: Joint distributions and Bayes' rule}{52}
+\noindent\dcrowc{{L/P,O/84,T/85,D/86,D/87,D/88,V/89,E/90,C/91,R/92},{L/Q,T/93,D/94,D/95,D/96,D/97,V/98,E/99,C/100,R/101},{L/R,O/102,T/103,D/104,D/105,D/106,V/107,E/108,C/109,R/110},{L/S,O/111,T/112,D/113,D/114,D/115,V/116,E/117,C/118,R/119},{L/T,T/120,D/121,D/122,D/123,V/124,E/125,C/126,R/127},{L/U,O/128,T/129,D/130,D/131,D/132,D/133,V/134,E/135,C/136,R/137},{L/V,T/138,D/139,D/140,D/141,D/142,V/143,E/144,C/145,R/146}}
+\entry{\S4: Likelihood and maximum likelihood estimation}{84}
+\noindent\dcrowc{{L/W,O/147,T/148,D/149,D/150,D/151,V/152,E/153,C/154,R/155},{L/X,T/156,D/157,D/158,D/159,V/160,E/161,C/162,R/163},{L/Y,O/164,T/165,D/166,D/167,D/168,V/169,E/170,C/171,R/172},{L/Z,T/173,D/174,D/175,D/176,V/177,E/178,C/179,R/180}}
+\entry{\S5: Bias and more maximum likelihood estimates}{99}
+\noindent\dcrowc{{M/AA,O/181,T/182,D/183,D/184,D/185,V/186,E/187,C/188,R/189},{M/AB,T/190,D/191,D/192,D/193,V/194,E/195,C/196,R/197},{M/AC,T/198,D/199,D/200,D/201,V/202,E/203,C/204,R/205},{M/AD,T/206,D/207,D/208,D/209,D/210,V/211,E/212,C/213,R/214},{M/AE,O/215,T/216,D/217,D/218,D/219,V/220,E/221,C/222,R/223}}
+\entry{\S6: Priors, MAP estimation and the posterior}{112}
+\noindent\dcrowc{{M/AF,O/224,T/225,D/226,D/227,D/228,D/229,V/230,E/231,C/232,R/233},{M/AG,T/234,D/235,D/236,D/237,V/238,E/239,C/240,R/241},{M/AH,O/242,T/243,D/244,D/245,D/246,V/247,E/248,C/249,R/250},{M/AI,O/251,T/252,D/253,D/254,D/255,V/256,E/257,C/258,R/259}}
+\entry{Summary}{124}
+\noindent{\renewcommand{\dcLw}{11pt}\renewcommand{\dcMw}{15pt}\dcrowc{{L/A,L/B,L/C,L/D,L/E,L/F,L/G,L/H,L/I,L/J,L/K,L/L,L/M,L/N,L/O,L/P,L/Q,L/R,L/S,L/T,L/U,L/V,L/W,L/X,L/Y,L/Z,M/AA,M/AB,M/AC,M/AD,M/AE,M/AF,M/AG,M/AH,M/AI}}}
+\entry{Diagnostic check}{131}
+\noindent\dcrowc{{Z/1,Z/2,Z/3,Z/4,Z/5},{Z/6,Z/7,Z/8,Z/9},{Z/10,Z/11,Z/12,Z/13,Z/14},{Z/15,Z/16,Z/17,Z/18},{Z/19,Z/20,Z/21,Z/22,Z/23},{Z/24,Z/25,Z/26,Z/27},{Z/28,Z/29,Z/30,Z/31,Z/32,Z/33,Z/34}}
+\targets
+\end{document}

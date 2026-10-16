@@ -53,6 +53,24 @@ the upstream copy):
 - `to-tickets`
 - `tdd` (matches the mattpocock/skills version of `tdd`, not the backnotprop/pstack version, which has different content under the same name)
 
+Added 2026-09-26, copied verbatim from upstream commit `c55ee46` (Codex-only `agents/openai.yaml`
+left out):
+
+- `ask-matt`
+- `grill-me`
+- `handoff`
+- `implement`
+- `research`
+- `resolving-merge-conflicts`
+- `teach`
+- `to-questionnaire`
+- `to-spec`
+- `triage`
+- `wait-what`
+- `wayfinder`
+- `wizard`
+- `writing-for-agents`
+
 ---
 
 ## backnotprop/pstack

@@ -1,0 +1,367 @@
+% Canonical preamble of the visual variant.
+% Copy it into <name>-chapter.tex. It registers paragraph exercises, Theory blocks, Prior knowledge, the Summary snake and the Diagnostic check for the Contents.
+\documentclass[11pt]{article}
+\usepackage[left=1.25in,right=1.25in,top=1in,bottom=0.8in]{geometry}  % equal left and right margins; the exercise pills hang in the left margin
+\usepackage{enumitem}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{matrix,decorations.pathreplacing,calc,positioning,arrows.meta}
+\usepackage{pgfplots}\pgfplotsset{compat=1.16}
+\definecolor{vpink}{RGB}{233,30,140}
+\definecolor{dblue}{RGB}{20,50,140}
+\pgfplotsset{mastery/.style={width=4.9cm,height=3.6cm,axis lines=left,grid=major,
+  grid style={gray!25},tick label style={font=\scriptsize},label style={font=\footnotesize},
+  title style={font=\footnotesize},ymin=0,scaled y ticks=false,every axis plot/.append style={thick}}}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{pdfrender}
+\usepackage{multicol}
+\usepackage{mastery-breaks}  % line and page break rules, in the skill's reference folder (build-chapter.sh finds it)
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=violet!55!black, citecolor=violet!55!black,
+  urlcolor=violet!55!black, linktoc=all}
+
+\newcommand{\R}{\mathbb{R}}
+\renewcommand{\labelenumii}{(\alph{enumii})}
+\setlength{\jot}{8pt}
+\newif\ifshowanswers
+% one source, two PDFs: build-chapter.sh defines \hidesolutions for the questions-only PDF
+\ifdefined\hidesolutions\showanswersfalse\else\showanswerstrue\fi
+
+% A solution keeps together with its part. A breakable tcolorbox cannot do that on its own: it forces a page break before its first
+% line when the page has no room left, so the part text stays at the bottom of one page and the solution starts the next. So a short
+% solution (measured, below 40 percent of the text height) is a non-breakable box. A long solution (a full argument, a figure) is a
+% breakable box, and may continue on the next page; that is correct for a solution that is a page long on its own.
+\newtcolorbox{solboxn}{enhanced, sharp corners, colback=blue!5, colframe=blue!5, boxrule=0pt,
+  left=3pt, right=3pt, top=2pt, bottom=2pt,
+  before={\ifnum\lastnodetype=-1\relax\else\par\ifvmode\addvspace{\glueexpr2pt-\parskip}\nointerlineskip\fi\fi\lineskip=0pt\relax\noindent},
+  after={\par\nobreak}}
+\let\mbaddpenalty\addpenalty
+\newcommand{\mbnopen}[1]{\penalty10000\relax}
+\newtcolorbox{solbox}{breakable, enhanced, sharp corners, colback=blue!5, colframe=blue!5, boxrule=0pt,
+  left=3pt, right=3pt, top=2pt, bottom=2pt,
+  before={\ifnum\lastnodetype=-1\relax\else\par\ifvmode\addvspace{\glueexpr2pt-\parskip}\nointerlineskip\fi\fi\lineskip=0pt\relax\noindent
+    \let\addpenalty\mbnopen},
+  before upper={\let\addpenalty\mbaddpenalty},
+  after={\par\nobreak}}
+\newsavebox{\solmeasure}
+\newcommand{\sol}[1]{%
+\ifshowanswers
+\mbtight
+\setbox\solmeasure\vbox{\hsize=\dimexpr\linewidth-6pt\relax #1\par}%
+\ifdim\dimexpr\ht\solmeasure+\dp\solmeasure\relax<0.4\textheight
+\noindent\begin{solboxn}#1\end{solboxn}%
+\else
+\noindent\begin{solbox}#1\end{solbox}%
+\fi
+\mbtight\vspace{9pt}
+\else
+\mbtight\vspace{0.8em}
+\fi}
+
+% Exercise lists: level 1 (the exercise run) has no left margin, so the exercise text sits flush with the text block and the
+% tag, hung in the label box, ends 1em before it (in the margin). Level 2 (the parts (a), (b), ...) has a fixed label box, so a
+% wrapped line always continues under the first letter of the part text.
+\setlist[enumerate,1]{leftmargin=0pt,labelwidth=0pt,labelsep=0.6em,align=right,itemsep=3pt,parsep=1pt,topsep=2pt}
+\setlist[enumerate,2]{leftmargin=2.1em,labelwidth=1.6em,labelsep=0.5em,align=left,itemsep=3pt,parsep=1pt,topsep=2pt,partbreaks}  % partbreaks: page-break rules for the parts, from mastery-breaks.sty
+
+% --- chapter identity: the chapter number picks a dark rainbow color, used by every header ---
+\definecolor{chcolor1}{RGB}{183,28,28}    % 1 red
+\definecolor{chcolor2}{RGB}{204,85,0}     % 2 orange
+\definecolor{chcolor3}{RGB}{166,124,0}    % 3 yellow (dark gold)
+\definecolor{chcolor4}{RGB}{27,120,45}    % 4 green
+\definecolor{chcolor5}{RGB}{21,101,192}   % 5 blue
+\definecolor{chcolor6}{RGB}{63,61,168}    % 6 indigo
+\definecolor{chcolor7}{RGB}{123,47,158}   % 7 violet
+\colorlet{chapcolor}{black}
+\newcommand{\thick}{\pdfrender{TextRenderingMode=FillStroke,LineWidth=0.45pt}}  % faux extra-bold, stroked in the current color
+\newcommand{\setchapter}[1]{\colorlet{chapcolor}{chcolor#1}}
+% --- headers: the chapter title is a solid band across the whole page in the chapter colour, with white text; every section
+% header (paragraphs, Legend, Contents, Summary, Diagnostic check) sits on a pale band that runs from the left page edge to the
+% right edge of the text, rounded on the right. ---
+\newsavebox{\hbx}
+\newcommand{\behindband}[5]{\edef\bandt{\the\dimexpr\ht\hbx+#5\relax}\edef\bandb{\the\dimexpr-\dp\hbx-#5\relax}%
+\begin{tikzpicture}[overlay]\fill[#1,rounded corners=#4](#2,\bandb)rectangle(#3,\bandt);\end{tikzpicture}\usebox{\hbx}}
+\newcommand{\chaptercredit}{Created with the write-mastery-chapter skill}
+\newcommand{\chaptertitle}[4]{\setchapter{#2}\gdef\thischap{#2}%
+\par\vspace*{-21pt}\noindent\sbox{\hbx}{\begin{minipage}[t]{\linewidth}\centering{\LARGE\bfseries\color{white}\thick #1: CHAPTER #2\enspace #3}\\[6pt]{\large\color{white} #4}\\[5pt]{\footnotesize\color{white!85}\chaptercredit}\end{minipage}}%
+\edef\bandxl{\the\dimexpr-1in-\oddsidemargin-20pt\relax}\edef\bandxr{\the\dimexpr\paperwidth-1in-\oddsidemargin+20pt\relax}%
+\behindband{chapcolor}{\bandxl}{\bandxr}{0pt}{12pt}\par\vspace{73pt}}
+% #1 = the paragraph number, hung in the left margin and right-aligned like the exercise pills (its right end sits 1em before
+% the text), #2 = the title, at the left edge of the text. \leavevmode keeps the number on the title line.
+\newcommand{\secbandn}[2]{\par\vspace{18pt}\noindent\sbox{\hbx}{\begin{minipage}[t]{\linewidth}\leavevmode\llap{{\Large\bfseries\color{chapcolor}\thick #1}\hspace{0.6em}}{\Large\bfseries\color{chapcolor}\thick #2}\end{minipage}}%
+\edef\bandxl{\the\dimexpr-1in-\oddsidemargin-20pt\relax}\edef\bandxr{\the\dimexpr\textwidth+10pt\relax}%
+\behindband{chapcolor!22}{\bandxl}{\bandxr}{9pt}{7pt}\par\vspace{14pt}\nopagebreak}
+\newcommand{\secband}[1]{\secbandn{}{#1}}
+\makeatletter
+\renewcommand\section{\@ifstar{\secband}{\secband}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}{-3.25ex\@plus -1ex \@minus -.2ex}{1.5ex \@plus .2ex}{\normalfont\large\bfseries\color{chapcolor}\thick}}
+% the page number is a link back to the Contents (the whole dome is clickable); \tableofcontents below puts the target "contents" above the Contents
+\newcommand{\pnum}{\tikz[remember picture,overlay]{\fill[chapcolor,fill opacity=0.3]([xshift=-0.6cm]current page.south) arc[start angle=180,end angle=0,radius=0.6cm]--cycle;\node[text=chapcolor,font=\bfseries\small,anchor=south] at ([yshift=0.08cm]current page.south){{\hypersetup{linkcolor=chapcolor}\hyperlink{contents}{\hbox to 1.1cm{\hss\vrule height 0.5cm depth 0pt width 0pt\thepage\hss}}}};}}  % dome on the bottom edge, page number inside
+\newcommand{\legpnum}{\tikz[baseline=0pt]{\fill[chapcolor,fill opacity=0.3](-0.32cm,-0.06cm) arc[start angle=180,end angle=0,radius=0.32cm]--cycle;\node[text=chapcolor,font=\bfseries\scriptsize,anchor=south] at (0,-0.04cm){7};}}  % a sample page number, for the Legend
+\let\dcoldtoc\tableofcontents\renewcommand{\tableofcontents}{\hypertarget{contents}{}\dcoldtoc}
+\def\ps@plain{\let\@oddhead\@empty\let\@evenhead\@empty\def\@oddfoot{\hfil\pnum\hfil}\let\@evenfoot\@oddfoot}
+\pagestyle{plain}
+\makeatother
+
+% --- badges: exercise role, not exercise identity. No outline on any of them. ---
+% Before the Theory box: P (not used in this pilot) and O. After it: T D V E C R.
+% Colors: O teal, T orange, P yellow, V pink (all four unchanged); D blue, E green, C red, R violet.
+\newcommand{\badge}[2]{\begin{tikzpicture}[baseline=-0.65ex]\node[shape=circle,fill=#1,inner sep=1.4pt,font=\bfseries\scriptsize,text=white]{#2};\end{tikzpicture}}
+% The exercise tag is ONE pill of medium height, vertically centred on the first line of the exercise text: a letter cell in a
+% dialed-down solid colour (75%) with a white letter, and a paler number cell (22%) with a dark number. There is no outline and no
+% line between the cells. The digits sit on the text baseline in the size of the text, and the pill is as long as its number needs.
+% \Xbadge alone gives the letter disc (Legend, box titles), \Xbadge[12] gives the pill.
+\newlength{\wn}
+% --- source labels (brown at 26% fill and 95% text, so they take the tint of any page; small, italic, no triangle) ---
+% A source is on the whole exercise OR on its parts, never on both. A whole exercise: a grey capsule with a notched left edge around the badge,
+% \extags{source}{\Ebadge} instead of \extag{\Ebadge} (same for a Diagnostic number, \diagnums{source}). A part: \srcref{source}, an arrow
+% (notch left, point right) in the margin whose point ends on the right edge of the badges. The text stands against the pill or the point.
+\newlength{\wsrc}\newlength{\wcap}\newlength{\wfix}\settowidth{\wfix}{\scriptsize\itshape Math4AI}
+\gdef\dcsrc{}
+\newif\ifdcexsrc
+\definecolor{srcbrown}{RGB}{140,90,45}
+\tikzset{srcfill/.style={fill=srcbrown,fill opacity=0.26},srctext/.style={text=srcbrown,text opacity=0.95}}
+% arrow: notch on the left, point on the right, depth 4.5pt, from y=-3.4pt to 11pt
+\newcommand{\chev}[2]{\path[srcfill,rounded corners=1.2pt](#1,11pt)--(#2-4.5pt,11pt)--(#2,3.8pt)--(#2-4.5pt,-3.4pt)--(#1,-3.4pt)--(#1+4.5pt,3.8pt)--cycle;}
+% capsule: notch on the left, round on the right
+\newcommand{\capnotch}[2]{\path[srcfill,rounded corners=1.2pt](#1,12.6pt)--(#2-8.9pt,12.6pt) arc(90:-90:8.9pt)--(#1,-5.2pt)--(#1+5pt,3.7pt)--cycle;}
+\newcommand{\dcsrcdraw}{\ifdim\wsrc<\wfix\setlength{\wcap}{\wfix}\else\setlength{\wcap}{\wsrc}\fi
+  \edef\xl{\the\dimexpr-\wcap-12pt\relax}\edef\xt{\the\dimexpr-\wsrc-4.5pt\relax}\edef\xr{\the\dimexpr\Wtot+1.8pt\relax}%
+  \capnotch{\xl}{\xr}
+  \node[anchor=base west,inner sep=0pt,srctext,font=\scriptsize\itshape]at(\xt,1pt){\dcsrc};}
+\newcommand{\tagpill}[3]{\settowidth{\wn}{\bfseries\normalsize #3}%
+\edef\Wtot{\the\dimexpr15.9pt+3.4pt+\wn+4.6pt\relax}\edef\xn{\the\dimexpr15.9pt+3.4pt+\wn/2\relax}%
+\ifx\dcsrc\empty\else\settowidth{\wsrc}{\scriptsize\itshape\dcsrc}\fi
+\colorlet{tplet}{#1!75}\colorlet{tpnum}{#1!22}\colorlet{tptxt}{#1!90!black}%
+\raisebox{0pt}[0pt][0pt]{\tikz[baseline=0pt]{\useasboundingbox(0pt,-3.4pt)rectangle(\Wtot,11pt);\ifx\dcsrc\empty\else\dcsrcdraw\fi
+ \begin{scope}\clip[rounded corners=7.2pt](0pt,-3.4pt)rectangle(\Wtot,11pt);
+ \fill[tpnum](0pt,-3.4pt)rectangle(\Wtot,11pt);\fill[tplet](0pt,-3.4pt)rectangle(15.9pt,11pt);\end{scope}
+ \node[text=white,font=\bfseries\scriptsize,anchor=base] at (7.95pt,1.1pt){#2};
+ \node[text=tptxt,font=\bfseries\normalsize,anchor=base] at (\xn,0pt){#3};}}}
+% only the first part of the pill (the letter cell), for the labels in the Legend
+% a row of the seven chapter colours, the current chapter outlined
+\newcommand{\legchap}{\foreach \n in {1,...,7}{\edef\lc{chcolor\n}\colorlet{tmpc}{\lc}\tikz[baseline=-2.25pt]{\fill[tmpc,rounded corners=3pt](0pt,-7pt)rectangle(15pt,7pt);
+\ifnum\n=\thischap\draw[black,line width=1.6pt,rounded corners=2.5pt](0.8pt,-6.2pt)rectangle(14.2pt,6.2pt);\fi
+\node[text=white,font=\bfseries\scriptsize] at (7.5pt,0pt){\n};}\hspace{2pt}}}
+\newcommand{\legletter}[2]{\colorlet{tplet}{#1!75}\raisebox{0pt}[0pt][0pt]{\tikz[baseline=0pt]{\useasboundingbox(0pt,-3.4pt)rectangle(15.9pt,11pt);\begin{scope}\clip[rounded corners=7.2pt](0pt,-3.4pt)rectangle(30pt,11pt);\clip(0pt,-3.4pt)rectangle(15.9pt,11pt);
+ \fill[tplet](0pt,-3.4pt)rectangle(15.9pt,11pt);\end{scope}
+ \node[text=white,font=\bfseries\scriptsize,anchor=base] at (7.95pt,1.1pt){#2};}}}
+\newcommand{\mkbadge}[3]{\ifx\relax#3\relax\badge{#1}{#2}\else\dclog{#2}{#3}\hypertarget{ex:#3}{}\tagpill{#1}{#2}{#3}\fi}
+\newcommand{\Pbadge}[1][]{\mkbadge{yellow!40!orange!85!black}{P}{#1}}
+\newcommand{\Obadge}[1][]{\mkbadge{teal!60!black}{O}{#1}}
+\newcommand{\Tbadge}[1][]{\mkbadge{orange!85!red}{T}{#1}}
+\newcommand{\Dbadge}[1][]{\mkbadge{dblue}{D}{#1}}          % Drill
+\newcommand{\Vbadge}[1][]{\mkbadge{vpink}{V}{#1}}
+\newcommand{\Ebadge}[1][]{\mkbadge{green!45!black}{E}{#1}} % Exam
+\newcommand{\Cbadge}[1][]{\mkbadge{red!70!black}{C}{#1}}   % Challenge
+\newcommand{\Rbadge}[1][]{\mkbadge{violet!70!black}{R}{#1}}
+
+% --- Contents: every exercise and every Theory block as a clickable cell -----------------------------------------------------
+% Each numbered badge and each theorybox writes one line to the .aux file (paragraph, type, key). The Contents reads those lines
+% back: one long pill per Theory block: a solid cell with the Theory letter (white) first, then the orienting exercise (it stands before
+% its Theory box in the text but sits after the Theory cell here), then one light cell per exercise in the colour of its type. Every cell is a link. A pill is one unbreakable box, so it never splits over
+% two lines, and the rows are ragged on the right.
+\makeatletter
+\newcommand{\curpara}{0}
+\newcommand{\dclog}[2]{\protected@write\@auxout{}{\string\exentry{\curpara}{#1}{#2}}}
+\def\dcgetletter#1:#2\relax{#1}
+% Prior knowledge has its own letters (type Q, drawn in the Prior colour, target th:P<letter>), the chapter Theory letters (type L) start at A again
+\newif\ifdcprior
+\newcommand{\dclogL}[1]{\edef\dcletx{\dcgetletter #1:\relax}\edef\dclty{\ifdcprior Q\else L\fi}%
+\edef\dcwrite{\noexpand\protected@write\noexpand\@auxout{}{\noexpand\string\noexpand\exentry{\curpara}{\dclty}{\dcletx}}}\dcwrite
+\edef\dctarget{th:\ifdcprior P\fi\dcletx}\hypertarget{\dctarget}{}}
+\newcommand{\dcN}{N}\newcommand{\dcO}{O}\newcommand{\dcQ}{Q}\newcommand{\dcL}{L}\newcommand{\dcP}{P}\newcommand{\dcZ}{Z}
+\newcommand{\dcadd}[1]{\expandafter\g@addto@macro\csname exl@\dcp\endcsname{#1}}
+\gdef\dcpendo{}\gdef\dcallL{}
+\newcommand{\exentry}[3]{%
+ \@ifundefined{exl@#1}{\expandafter\gdef\csname exl@#1\endcsname{N/0}}{}%
+ \edef\dcty{#2}\def\dcp{#1}%
+ \ifx\dcty\dcO\gdef\dcpendo{#3}\else
+  \ifx\dcty\dcQ\dcadd{,N/0,Q/#3}\else\ifx\dcty\dcL\ifx\dcallL\empty\xdef\dcallL{L/#3}\else\xdef\dcallL{\dcallL,L/#3}\fi\dcadd{,N/0,L/#3}\ifx\dcpendo\empty\else\xdef\dcaddstr{,O/\dcpendo}\expandafter\g@addto@macro\csname exl@\dcp\expandafter\endcsname\expandafter{\dcaddstr}\gdef\dcpendo{}\fi
+  \else\dcadd{,#2/#3}\fi\fi
+ \fi}
+\makeatother
+\newcommand{\cO}{teal!60!black}\newcommand{\cT}{orange!85!red}\newcommand{\cD}{dblue}\newcommand{\cV}{vpink}
+\newcommand{\cZ}{chapcolor}\newcommand{\cE}{green!45!black}\newcommand{\cC}{red!70!black}\newcommand{\cR}{violet!70!black}\newcommand{\cP}{yellow!40!orange!85!black}
+\newdimen\gw \newdimen\cxx \newdimen\wl
+\newcommand{\dctint}{35}
+\newcommand{\dcLone}{13pt}\newcommand{\dcLtwo}{19pt}
+\def\dcletterwidth#1#2\relax{\ifx\relax#2\relax\let\cwd\dcLone\else\let\cwd\dcLtwo\fi}
+\newcommand{\dcwidth}[2]{\ifx#1\dcL\dcletterwidth#2\relax\else\ifx#1\dcQ\dcletterwidth#2\relax\else\ifnum#2>99 \def\cwd{17pt}\else\def\cwd{13pt}\fi\fi\fi}
+\newcommand{\pillgroup}[1]{\global\gw=0pt%
+\foreach \t/\k in #1{\dcwidth{\t}{\k}\global\advance\gw by \cwd}%
+\tikz[baseline=-2.25pt]{\clip[rounded corners=7pt](0pt,-7pt)rectangle(\gw,7pt);\global\cxx=0pt
+\foreach \t/\k in #1{\dcwidth{\t}{\k}%
+\ifx\t\dcL\colorlet{cellcol}{chapcolor}\colorlet{cellnum}{white}\edef\lnk{th:\k}\else\ifx\t\dcQ\colorlet{cellcol}{priorcol}\colorlet{cellnum}{white}\edef\lnk{th:P\k}\else\edef\dccol{\csname c\t\endcsname}\colorlet{cellcol}{\dccol!\dctint}\colorlet{cellnum}{\dccol!90!black}\ifx\t\dcP\edef\lnk{ex:P\k}\else\ifx\t\dcZ\edef\lnk{ex:Z\k}\colorlet{cellnum}{chapcolor}\else\edef\lnk{ex:\k}\fi\fi\fi\fi
+\edef\xa{\the\cxx}\edef\xm{\the\dimexpr\cxx+\cwd/2\relax}\edef\xb{\the\dimexpr\cxx+\cwd\relax}%
+\fill[cellcol](\xa,-7pt)rectangle(\xb,7pt);\draw[white,line width=0.9pt](\xb,-7pt)--(\xb,7pt);
+\node[inner sep=0pt,text=cellnum,font=\bfseries\fontsize{6.8}{6.8}\selectfont] at (\xm,0pt){\hyperlink{\lnk}{\hbox to \cwd{\hss\color{cellnum}\vrule height 9.25pt depth 4.75pt width 0pt\k\hss}}};
+\global\cxx=\xb}}}
+% Contents entries: a large bold title in the chapter colour with the page number on the right (no dotted leader). The pills follow.
+\makeatletter
+\renewcommand{\l@section}[2]{\par\vspace{7pt}\noindent{\large\bfseries #1}\hfill{\large\bfseries #2}\par\vspace{2pt}}
+\makeatother
+\makeatletter
+\newcommand{\dcrowflat}[1]{\@ifundefined{exl@#1}{}{\par\vspace{-1pt}{\raggedright\noindent\xdef\dcacc{}\edef\dclist{\csname exl@#1\endcsname}%
+\foreach \t/\k in \dclist{\ifx\t\dcN\ifx\dcacc\empty\else\mbox{\pillgroup{\dcacc}}\hspace{1.5pt}\xdef\dcacc{}\fi\else\ifx\dcacc\empty\xdef\dcacc{\t/\k}\else\xdef\dcacc{\dcacc,\t/\k}\fi\fi}%
+\ifx\dcacc\empty\else\mbox{\pillgroup{\dcacc}}\fi\par}\vspace{3pt}}}
+% one Diagnostic group as a pill (no leading N marker is drawn), and the rows for the Summary snake and the Diagnostic check
+\newcommand{\dcgroup}[1]{\@ifundefined{exl@#1}{}{\xdef\dcacc{}\edef\dclist{\csname exl@#1\endcsname}%
+\foreach \t/\k in \dclist{\ifx\t\dcN\else\ifx\dcacc\empty\xdef\dcacc{\t/\k}\else\xdef\dcacc{\dcacc,\t/\k}\fi\fi}%
+\ifx\dcacc\empty\else\mbox{\pillgroup{\dcacc}}\fi}}
+\newcommand{\dcdiagrow}[1]{\par\vspace{-1pt}{\raggedright\noindent\foreach \g in {#1}{\dcgroup{\g}\hspace{4pt}}\par}\vspace{3pt}}
+\newcommand{\dcsnake}{\par\vspace{-1pt}{\raggedright\noindent\renewcommand{\dcLone}{11pt}\renewcommand{\dcLtwo}{15pt}\mbox{\pillgroup{\dcallL}}\par}\vspace{3pt}}
+\makeatother
+\newif\ifvfill  % V exercises: axes are drawn blank in the question, and filled inside \sol
+% starts a new page when less than the given space is left (exact test with \pagetotal; the stretch trick of the needspace package
+% is not used, it breaks the page early whenever the page has no stretch)
+\newcommand{\needspace}[1]{\par\begingroup\dimen0=\pagetotal\advance\dimen0 by #1\relax\ifdim\dimen0>\pagegoal\penalty-10000 \fi\endgroup}
+
+% --- the Theory unit is a stack of sibling boxes (Theory box, then worked example) ---
+% so that a worked example can break across pages. Nested breakable boxes are not possible in tcolorbox.
+\newtcolorbox{theorybox}[2]{breakable, enhanced, sharp corners, colback=yellow!15, colframe=yellow!15,
+  boxrule=0pt, frame hidden, left=8pt, right=8pt, top=2pt, bottom=4pt,
+  before skip=6pt, after skip=0pt,
+  title={\large\bfseries\color{chapcolor}\thick Theory #1}, fonttitle=\normalsize,
+  coltitle=chapcolor, colbacktitle=yellow!15, toptitle=3pt, bottomtitle=3pt,
+  before upper={\mbkeep \dclogL{#1}},
+  label={thy:#2}}
+% --- Prior knowledge: its own colour (mustard) instead of the chapter colour, its own letters A, B, ..., and it stays out of the Summary ---
+% Inside priorsection everything that is drawn in the chapter colour (header band, box titles, new terms, Contents letters) is mustard.
+\definecolor{priorcol}{RGB}{150,104,8}
+\newenvironment{priorsection}{\begingroup\colorlet{chapcolor}{priorcol}}{\endgroup}
+\newcommand{\priortitle}{\section*{Prior knowledge}\addcontentsline{toc}{section}{Prior knowledge}}  % the Contents title stays black like the others
+\newtcolorbox{priorbox}[2]{breakable, enhanced, sharp corners, colback=yellow!15, colframe=yellow!15,
+  boxrule=0pt, frame hidden, left=8pt, right=8pt, top=2pt, bottom=4pt,
+  before skip=6pt, after skip=0pt,
+  title={\large\bfseries\color{chapcolor}\thick Prior #1}, fonttitle=\normalsize,
+  coltitle=chapcolor, colbacktitle=yellow!15, toptitle=3pt, bottomtitle=3pt,
+  before upper={\mbkeep \dcpriortrue\dclogL{#1}},
+  label={thy:#2}}
+% when the chapter also repeats earlier chapters: a small heading per origin, and a pointer in a block that comes from an earlier chapter
+\newcommand{\priorgroup}[1]{\par\vspace{10pt}\noindent{\bfseries\color{chapcolor}#1}\par\vspace{2pt}{\color{chapcolor!45}\hrule height 0.6pt}\vspace{5pt}}
+\newcommand{\priorfrom}[1]{\noindent{\footnotesize\itshape\color{black!60}#1}\par\smallskip}
+
+\newtcolorbox{theorycont}{breakable, enhanced, sharp corners, colback=yellow!15, colframe=yellow!15,
+  boxrule=0pt, frame hidden, left=8pt, right=8pt, top=2pt, bottom=4pt,
+  before skip=0pt, after skip=0pt, before upper={\mbkeep }}
+\newtcolorbox{recipebox}{enhanced, colback=yellow!15, colframe=yellow!15, boxrule=0pt,
+  borderline west={2pt}{0pt}{violet!55!black}, left=10pt, right=4pt, top=3pt, bottom=3pt}
+\newtcolorbox{workedbox}{breakable, enhanced, sharp corners, colback=yellow!4, colframe=yellow!15,
+  boxrule=0pt, leftrule=8pt, rightrule=8pt, toprule=4pt, bottomrule=4pt,
+  toprule at break=0pt, bottomrule at break=0pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt, before skip=0pt, after skip=0pt, before upper={\mbkeep }}
+\newcommand{\workedheading}{\textbf{Worked example}\par\smallskip\noindent\itshape}
+% in the question of a worked example every lettered part starts on its own line: write \wpart before (a), (b), ... (not before the first one when it opens the question)
+\newcommand{\wpart}{\par\vspace{3pt}\noindent}
+\newcommand{\workedanswer}{\par\upshape\smallskip\noindent\rule{2.5em}{0.6pt}\par\smallskip\noindent}
+\newcommand{\scenario}[1]{\par\noindent#1\mbtight\medskip}
+\newtcolorbox{terugblikbox}{enhanced, colback=purple!5, colframe=purple!5, before skip=14pt, after skip=8pt,  % not breakable: a Review is never split over two pages
+  boxrule=0pt, frame hidden, left=8pt, right=8pt, top=2pt, bottom=4pt,
+  title={\Large\bfseries\color{chapcolor}\thick Review}, fonttitle=\normalsize,
+  coltitle=chapcolor, colbacktitle=purple!5, toptitle=4pt, bottomtitle=4pt, before upper={\mbkeep }}
+
+% --- exercise numbering: always a bare number, never a compound label ---
+% Prior knowledge and the Diagnostic check have their own streams. A Prior knowledge number is a bold gold number in the margin
+% (no pill), a Diagnostic number is a bold number in the chapter colour. Both write to the Contents and are link targets.
+\newcounter{priorN}\newcounter{diagN}
+\newcommand{\priornum}{\stepcounter{priorN}\global\dcexsrcfalse\dclog{P}{\arabic{priorN}}\hypertarget{ex:P\arabic{priorN}}{}{\bfseries\large\color{\cP}\arabic{priorN}}}
+\newcommand{\diagnums}[1]{\stepcounter{diagN}\global\dcexsrctrue\dclog{Z}{\arabic{diagN}}\hypertarget{ex:Z\arabic{diagN}}{}%
+  \settowidth{\wn}{\bfseries\large\arabic{diagN}}\settowidth{\wsrc}{\scriptsize\itshape #1}%
+  \edef\wc{\the\dimexpr\wsrc+15pt\relax}\edef\xr{-3pt}\edef\xl{\the\dimexpr-3pt-\wc\relax}\edef\xt{\the\dimexpr-3pt-\wc+7.5pt\relax}%
+  \raisebox{0pt}[0pt][0pt]{\tikz[baseline=0pt]{\useasboundingbox(0pt,-3.4pt)rectangle(\wn,11pt);
+    \chev{\xl}{\xr}
+    \node[anchor=base west,inner sep=0pt,srctext,font=\scriptsize\itshape]at(\xt,1pt){#1};
+    \node[anchor=base west,inner sep=0pt,text=chapcolor,font=\bfseries\large]at(0pt,0pt){\arabic{diagN}};}}}
+\newcommand{\diagnum}{\stepcounter{diagN}\global\dcexsrcfalse\dclog{Z}{\arabic{diagN}}\hypertarget{ex:Z\arabic{diagN}}{}{\bfseries\large\color{chapcolor}\arabic{diagN}}}
+\newcounter{exN}     % one continuous stream across the whole chapter, never reset
+\newcommand{\exnum}{\stepcounter{exN}{\bfseries\large\arabic{exN}}}
+\newcommand{\extag}[1]{\stepcounter{exN}\global\dcexsrcfalse#1[\arabic{exN}]}  % the badge macro draws the pill with the number in it
+\newcommand{\extags}[2]{\stepcounter{exN}\global\dcexsrctrue\gdef\dcsrc{#1}#2[\arabic{exN}]\gdef\dcsrc{}}  % a whole exercise from a source
+
+% --- paragraph headings, cross-references, table of contents ---
+\newcommand{\parasection}[2]{\clearpage\gdef\curpara{#1}\secbandn{\S#1}{#2}\addcontentsline{toc}{section}{\S#1: #2}\addtocontents{toc}{\protect\dcrowflat{#1}}\label{sec:#1}}
+\newcommand{\frontsection}[1]{\section*{#1}\addcontentsline{toc}{section}{#1}}
+\newcommand{\secref}[1]{\hyperref[sec:#1]{\S#1}}
+\newcommand{\thyref}[2]{\hyperref[thy:#1#2]{\S#1 Theory #2}}
+
+% --- new term marker: the one moment a term/symbol gets defined, never after ---
+\makeatletter
+% key of a term: lower case, no spaces
+\newcommand{\dckey}[1]{\edef\dckeyv{\zap@space #1 \@empty}\lowercase\expandafter{\expandafter\def\expandafter\dckeyv\expandafter{\dckeyv}}}
+% the first \newterm of a term is a link target. Review and Summary link back to it with \tm (or \tl).
+\newcommand{\newterm}[1]{\dckey{#1}%
+  \@ifundefined{dct@\dckeyv}{\global\@namedef{dct@\dckeyv}{#1}\hypertarget{term:\dckeyv}{\textbf{\color{chapcolor}#1}}}{\textbf{\color{chapcolor}#1}}}
+\newcommand{\tl}[2][]{\dckey{#2}%
+  \@ifundefined{dct@\dckeyv}{\PackageWarning{mastery}{term "#2" has no \string\newterm}#2}%
+  {{\hypersetup{linkcolor=chapcolor}\hyperlink{term:\dckeyv}{\ifx\relax#1\relax\csname dct@\dckeyv\endcsname\else#1\fi}}}}
+\makeatother
+\newcommand{\tf}[1]{\,{\color{black!50}[}$#1${\color{black!50}]}}  % the formula or notation of a term, in brackets
+\newif\ifrvfirst\newif\ifrvsum
+% in the Review a term never breaks over two lines, in the narrow Summary column it may
+\newcommand{\rvnb}[1]{\ifrvsum#1\else\mbox{#1}\fi}
+% one term of a Review or Summary: [display text]{key of the \newterm}{formula or notation, may be empty}. It never breaks over two lines.
+\newcommand{\tm}[3][]{\ifrvfirst\rvfirstfalse\else,\ \fi\rvnb{\tl[#1]{#2}\ifx\relax#3\relax\else\tf{#3}\fi}}
+% a term that has no \newterm (so no link)
+\newcommand{\tn}[2]{\ifrvfirst\rvfirstfalse\else,\ \fi\rvnb{#1\ifx\relax#2\relax\else\tf{#2}\fi}}
+\newcommand{\extitle}[1]{\textbf{#1}}  % bold title of an exercise, black
+
+% --- provenance marker: one mechanism for any reference to a known source document ---
+% \srcref{source} at the start of a part: the arrow hangs in the left margin on the line of the part, its point ends on the right edge of the
+% badges (0.6em before the text edge). A source on the whole exercise is \extags (or \diagnums), see the source labels above.
+\makeatletter
+\newcommand{\srcref}[1]{\ifdcexsrc\PackageWarning{mastery}{source "#1" is on a part, but this exercise has a source on the whole exercise}\fi
+  \leavevmode\llap{\settowidth{\wsrc}{\scriptsize\itshape #1}\edef\wc{\the\dimexpr\wsrc+15pt\relax}%
+  \raisebox{0pt}[0pt][0pt]{\tikz[baseline=0pt]{\useasboundingbox(0pt,-3pt)rectangle(\wc,10pt);\chev{0pt}{\wc}
+   \node[anchor=base west,inner sep=0pt,srctext,font=\scriptsize\itshape]at(7.5pt,1pt){#1};}}\hspace{0.6em}\hspace{\@totalleftmargin}}}
+\makeatother
+% the same arrow inline, and a badge with a source, for the Legend (they do not count an exercise)
+\newcommand{\srcinline}[1]{\settowidth{\wsrc}{\scriptsize\itshape #1}\edef\wc{\the\dimexpr\wsrc+15pt\relax}%
+  \raisebox{0pt}[0pt][0pt]{\tikz[baseline=0pt]{\useasboundingbox(0pt,-3.4pt)rectangle(\wc,11pt);\chev{0pt}{\wc}
+   \node[anchor=base west,inner sep=0pt,srctext,font=\scriptsize\itshape]at(7.5pt,1pt){#1};}}}
+\newcommand{\legsrcpill}[4]{\mbox{\hspace*{\dimexpr\wfix+12pt\relax}\gdef\dcsrc{#1}\tagpill{#2}{#3}{#4}\gdef\dcsrc{}}}
+
+% --- chapter-specific math shorthand ---
+\newcommand{\vv}[1]{\mathbf{#1}}                  % bold letters for vectors and matrices
+\newcommand{\T}{^{\mathsf T}}                       % transpose
+\newcommand{\pd}[2]{\dfrac{\partial #1}{\partial #2}}
+\newcommand{\dd}[2]{\dfrac{d #1}{d #2}}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\tr}{tr}
+\newcommand{\mat}[1]{\begin{bmatrix}#1\end{bmatrix}}
+\newcommand{\smat}[1]{\left[\begin{smallmatrix}#1\end{smallmatrix}\right]}
+% the Summary is a two-column cheat sheet on a pale purple page
+\newenvironment{summarybox}{\pagecolor{purple!5}\small\raggedright\linespread{1.1}\selectfont\setlength{\columnsep}{22pt}\begin{multicols}{2}}{\end{multicols}\clearpage\nopagecolor}
+\newcommand{\sumsetup}{\setlength{\itemsep}{2pt}\setlength{\parsep}{0pt}\setlength{\topsep}{2pt}\setlength{\leftmargin}{1.2em}}
+\newcommand{\sumhead}[1]{\bigskip\noindent{\large\bfseries\color{chapcolor}\thick #1}\par\smallskip}
+
+% --- Review and Summary: one source. \review{id}{terms}{formulas}{recipes} puts the Review box at the end of a paragraph and
+% keeps the parts; \rvsummary{id}{heading}{sources} puts the same parts in the Summary. \rvdata stores the parts without a box.
+% terms: a run of \tm{key}{formula} and \tn{text}{formula}. formulas: \item lines, one formula each. recipes: \recipe{name}{\item step ...}.
+\newenvironment{rvlist}{\begin{list}{\color{chapcolor}$\bullet$}{\setlength{\leftmargin}{1.5em}\setlength{\labelwidth}{1em}\setlength{\labelsep}{0.5em}\setlength{\itemsep}{5pt}\setlength{\topsep}{2pt}\setlength{\parsep}{0pt}}}{\end{list}}
+% a recipe: in the Review the name stands left and the numbered steps run on to its right, in the Summary (narrow column) the name stands above the steps
+\newcounter{rvn}
+\newcommand{\rvstep}{\leavevmode\stepcounter{rvn}\ifnum\value{rvn}>1\ \fi{\color{chapcolor}\bfseries\arabic{rvn}.}\,}
+\newcommand{\recipe}[2]{\par\noindent\setcounter{rvn}{0}%
+  \ifrvsum\begin{minipage}{\linewidth}\textbf{#1}\par\vspace{2pt}{\let\item\rvstep #2}\end{minipage}\par\vspace{9pt}%
+  \else\begin{minipage}[t]{0.27\linewidth}\raggedright\bfseries #1\end{minipage}\hfill\begin{minipage}[t]{0.71\linewidth}\let\item\rvstep #2\end{minipage}\par\vspace{7pt}\fi}
+\makeatletter
+\newcommand{\rvdata}[4]{\long\global\@namedef{rvT@#1}{#2}\long\global\@namedef{rvF@#1}{#3}\long\global\@namedef{rvR@#1}{#4}}
+\newcommand{\rvhead}[1]{\par\ifrvsum\noindent\textbf{#1.}\par\vspace{3pt}\else\medskip\noindent\textbf{\color{chapcolor}#1}\par\smallskip\fi}
+\newcommand{\rvbody}[1]{%
+  \rvhead{Terms}\rvfirsttrue\begingroup\raggedright\linespread{1.25}\selectfont\csname rvT@#1\endcsname.\par\endgroup
+  \ifrvsum\vspace{9pt}\fi
+  \rvhead{Formulas}\begin{rvlist}\csname rvF@#1\endcsname\end{rvlist}
+  \ifrvsum\vspace{9pt}\fi
+  \rvhead{Recipes}\csname rvR@#1\endcsname}
+\makeatother
+\newcommand{\review}[4]{\rvdata{#1}{#2}{#3}{#4}\begin{terugblikbox}\rvsumfalse\rvbody{#1}\end{terugblikbox}}
+\newcommand{\rvsummary}[3]{\begingroup\rvsumtrue\relpenalty=500 \binoppenalty=700 \sumhead{#2}\noindent Source: #3\par\vspace{4pt}\rvbody{#1}\vspace{14pt}\endgroup}
+
+% --- Legend swatches: the legend shows each box and page tint in its real colour ---
+\newcommand{\legbox}[2]{\begin{tcolorbox}[enhanced, sharp corners, colback=#1, colframe=#1, boxrule=0pt, left=8pt, right=8pt, top=4pt, bottom=4pt, before skip=5pt, after skip=5pt]#2\end{tcolorbox}}
+\newcommand{\legpage}[2]{\begin{tcolorbox}[enhanced, sharp corners, colback=#1, colframe=black!25, boxrule=0.5pt, left=8pt, right=8pt, top=6pt, bottom=6pt, before skip=5pt, after skip=5pt]#2\end{tcolorbox}}
+
+

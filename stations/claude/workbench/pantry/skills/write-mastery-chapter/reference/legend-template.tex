@@ -1,0 +1,63 @@
+\frontsection{Legend}
+\noindent Every exercise has a tag in the left margin: a coloured letter for its type, then its number. The numbers run through the whole
+chapter. The parts of an exercise are (a), (b), (c).
+
+\medskip\noindent\textbf{The boxes}\par\smallskip
+\begin{tcolorbox}[enhanced, sharp corners, colback=yellow!15, colframe=yellow!15, boxrule=0pt, left=8pt, right=8pt, top=4pt, bottom=4pt, before skip=5pt, after skip=0pt]
+\textbf{\color{chapcolor}Theory block.} Theory, built up from a concrete case. A new term is marked once, where it first appears.
+Figures sit in this box.
+\begin{recipebox}
+\textbf{Recipe.} A numbered how-to, marked by a purple bar.
+\end{recipebox}
+\end{tcolorbox}
+\begin{workedbox}
+\textbf{Worked example}\par\smallskip\noindent\itshape Worked example. The question is in italics.
+
+\par\upshape\smallskip\noindent\rule{2.5em}{0.6pt}\par\smallskip\noindent The answer follows below the short rule, one step per line.
+\end{workedbox}
+\legbox{purple!5}{\textbf{\color{chapcolor}Review.} Closes a paragraph with its terms (click one to jump to where it was introduced), its formulas and its recipes.}
+\legbox{blue!5}{\textbf{Solution.} The answer to the exercise above. Only in the answers version.}\medskip
+
+\noindent\textbf{The exercise types, in the order they appear}\nopagebreak
+\begin{description}[style=unboxed,leftmargin=0pt,itemsep=7pt,parsep=0pt]
+\item[\legletter{\cP}{P}\hspace{0.6em}Prior knowledge] Something you are assumed to know, made fluent before new material builds on it. Its exercises
+have their own numbers, in gold, and no letter.
+\item[\legletter{\cO}{O}\hspace{0.6em}Orient] A concrete probe you can already solve with what you know. It comes before a Theory block, so that the
+general rule feels earned and does not arrive cold.
+\item[\legletter{\cT}{T}\hspace{0.6em}Test] A gate-check right after the worked example: the same task with smaller numbers. It shows whether you are
+ready to move on, and it drills a little too.
+\item[\legletter{\cD}{D}\hspace{0.6em}Drill] The bulk of the practice: one family of the same move with different numbers, so the skill gets fast
+before anything harder is asked.
+\item[\legletter{\cV}{V}\hspace{0.6em}Visualize] Predict or sketch a picture, such as how a curve moves when a parameter changes, on empty axes first.
+Then compare with the plot in the solution. It builds a feel for what the formula does.
+\item[\legletter{\cE}{E}\hspace{0.6em}Exam] The level the course expects: chained questions with no hints, where you choose the method and write out the
+whole argument. If you can do these cleanly, you are ready.
+\item[\legletter{\cC}{C}\hspace{0.6em}Challenge] Harder than the exam asks, for example an unusual framing or an edge case. It is for depth, so skip it
+on a first pass.
+\item[\legletter{\cR}{R}\hspace{0.6em}Reflect] A short question that asks why. It revisits a step and generalizes it, answered in words. It deepens
+understanding, but the exam does not depend on it.
+\end{description}
+\noindent\textbf{Short on time?} Do T, D, V and E. C and R are extras.\par\medskip
+
+\needspace{12\baselineskip}
+\noindent\textbf{How to read the chapter}\nopagebreak
+\begin{description}[style=unboxed,leftmargin=0pt,itemsep=8pt,parsep=0pt]
+\item[Colours] The chapter number sets the colour of all headers. This is chapter \thischap. Prior knowledge always has its own colour, mustard.\par\smallskip
+\noindent\legchap
+\item[Contents] Each exercise is a cell in the colour of its type, and each Theory block is one pill that starts with its letter. Click a
+cell to jump there.\par\smallskip
+\noindent\mbox{\pillgroup{{L/K,O/1,T/2,D/3,D/4,D/5,D/6,V/7,E/8,C/9,R/10}}}
+\item[Links] Almost everything you can click jumps somewhere. A cell in the Contents goes to its exercise or Theory block. A term in a Review or Summary, in the chapter colour, goes to the place where it was introduced. A source line in the Summary goes to its Theory block. The page number \legpnum\ at the bottom of every page goes back to the Contents.
+\item[Source tag] A brown label marks a question taken from a source, in that source's wording. A source is on the whole exercise or on its parts, never on both.\par\smallskip
+\noindent\hspace*{\dimexpr\wfix-2pt\relax}\srcinline{Math4AI Ex 2}\enspace An arrow in the margin points to a part.\par\smallskip
+\noindent\legsrcpill{HW1 1a}{green!45!black}{E}{7}\enspace A capsule around a badge marks the whole exercise.
+\item[New term] A \newterm{bold coloured term} marks the first use of a new term, explained where it appears.
+\item[Assumed] Dutch VWO mathematics (wiskunde B), and nothing else. Matrices, sums with the Sigma symbol and partial derivatives are built up here.
+\end{description}
+\medskip
+
+\noindent\textbf{The pages}\par\smallskip
+\legpage{white}{\textbf{White page.} The numbered paragraphs, where new material is taught.}
+\legpage{yellow!8}{\textbf{Prior knowledge page.} What you are assumed to know, made fluent.}
+\legpage{purple!5}{\textbf{Summary page.} A two-column cheat sheet of the chapter.}
+\legpage{chapcolor!10}{\textbf{Diagnostic check page.} Fresh questions to test yourself, in the chapter colour.}
