@@ -1,0 +1,46 @@
+# ============================================================================
+#  LINE COOK COUNTERTOP: KITCHEN-ONLY (.gitignore entries)
+# ============================================================================
+# The files and folders in here define part of the line cooks kitchen countertop
+# This includes everything that should NOT get shipped out of the kitchen (github)
+# A good dish is a clean dish. Mess and germs should stay in the kitchen.
+#
+# Sole source of truth for .gitignore - nothing here is auto-merged from
+# elsewhere. Write it by hand:
+#   - Everything in .contraband MUST also be listed here (a shady-stash
+#     symlink must never end up tracked by git).
+#   - Anything in .dishsoap you also want gitignored must be duplicated
+#     here too - on purpose, so you actually think about each one.
+
+# Bytecode
+__pycache__/
+*.py[cod]
+
+# Virtual environments (machine-specific, rebuilt with `uv sync`)
+.venv/
+venv/
+
+# Secrets (also in .contraband)
+.env
+
+# Tool caches: ruff, pytest, mypy, hypothesis
+.ruff_cache/
+.pytest_cache/
+.mypy_cache/
+.hypothesis/
+
+# Coverage (pytest-cov)
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+# Packaging output
+build/
+dist/
+*.egg-info/
+
+# Jupyter autosaves
+.ipynb_checkpoints/
+
+# Kept in git on purpose: uv.lock, .python-version, pyproject.toml
