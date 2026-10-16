@@ -60,6 +60,13 @@ if ! git -C "$PROJECT_ROOT" rev-parse HEAD &>/dev/null; then
 fi
 
 # --- 4. GitHub repo creation ---
+# Creating the GitHub repo publishes something, so only do it with a person
+# at the terminal. Without one, hiring still sets up git and .gitignore.
+if [ ! -t 0 ] || [ ! -t 1 ]; then
+    SAY "No terminal, so I'm not creating a GitHub repo. Run 'bake github repo' yourself."
+    exit 0
+fi
+
 if ! gh auth status &>/dev/null; then
     SAY "Not logged in to GitHub (run: gh auth login), skipping repo creation"
     exit 0

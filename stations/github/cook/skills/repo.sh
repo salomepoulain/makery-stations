@@ -2,6 +2,13 @@
 set -e
 
 source "$(dirname "${BASH_SOURCE[0]}")/../personality.sh"
+
+# This pushes or publishes, so it needs a person at a real terminal: never an
+# agent's command or a script piping in answers (see the makery-bakery README).
+if [ ! -t 0 ] || [ ! -t 1 ]; then
+    SAY "This needs a person at a real terminal. Nothing was changed."
+    exit 1
+fi
 source "$(dirname "${BASH_SOURCE[0]}")/../topics.sh"
 
 find_project_root() {
