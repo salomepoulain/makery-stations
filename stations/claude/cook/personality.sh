@@ -59,7 +59,7 @@ _term_cols() {
     # and station menus don't each start stty again for every line.
     if [[ -z "${MAKERY_COLS:-}" ]]; then
         local size
-        size=$(stty size 2>/dev/null)
+        size=$(stty size 2>/dev/null) || size="" # no terminal: fall back to 80, and don't trip set -e
         MAKERY_COLS=${size##* }
         [[ "$MAKERY_COLS" =~ ^[0-9]+$ ]] || MAKERY_COLS=80
         export MAKERY_COLS
@@ -71,6 +71,19 @@ _term_cols() {
 _rule_into() {
     printf -v "$1" '%*s' "$MAKERY_COLS" ''
     printf -v "$1" '%s' "${!1// /$2}"
+}
+
+# A short pause after each printed line, so output scrolls in line by line.
+# MAKERY_LINE_DELAY is seconds per line (0 turns it off). Only on a terminal:
+# logs, pipes and agents get the output at full speed. bash's built-in sleep
+# (where it exists) keeps the pause exactly as long as asked; otherwise the
+# sleep program is used, which adds a few milliseconds.
+enable -f sleep sleep 2>/dev/null || true
+_pace() {
+    [[ -t 1 ]] || return 0
+    local d="${MAKERY_LINE_DELAY:-0.005}"
+    [[ "$d" == 0 || "$d" == 0.0 ]] && return 0
+    sleep "$d"
 }
 
 SAY() {
@@ -87,6 +100,7 @@ SAY() {
     # Most messages fit on one line: print them straight away, no fold.
     if (( ${#1} <= msg_width )) && [[ "$1" != *$'\n'* ]]; then
         echo -e "  ${COOK_COLOR}${COOK_ICON} $COOK_NAME:${NC}${spaces} ${ITALIC}${DIM}${1}${NC}"
+        _pace
         return
     fi
 
@@ -100,6 +114,7 @@ SAY() {
             echo -e "${cont_indent}${ITALIC}${DIM}${line}${NC}"
         fi
     done
+    _pace
 }
 
 ITEM() {
@@ -113,6 +128,7 @@ ITEM() {
     # Most descriptions fit on one line: print them straight away, no fold.
     if (( ${#2} <= desc_width )); then
         printf "  %-${cmd_width}s  %s\n" "$1" "$2"
+        _pace
         return
     fi
 
@@ -128,6 +144,7 @@ ITEM() {
             printf "%s  %s\n" "$cont_indent" "$desc_line"
         fi
     done <<< "$(printf '%s' "$2" | fold -sw "$desc_width")"
+    _pace
 }
 
 STARTER() {
@@ -138,6 +155,7 @@ STARTER() {
     echo -e "${COOK_COLOR}${rule}${NC}"
     echo -e "${COOK_COLOR}  $1${NC}"
     echo -e "${COOK_COLOR}${rule_thin}${NC}"
+    _pace
 }
 
 FINISHED() {
@@ -148,6 +166,7 @@ FINISHED() {
     echo -e "\n${COOK_COLOR}${rule_thin}${NC}"
     echo -e "${COOK_COLOR}  BAKE FINISHED${NC}"
     echo -e "${COOK_COLOR}${rule}${NC}"
+    _pace
 }
 
 LINE() {
@@ -155,4 +174,5 @@ LINE() {
     _term_cols >/dev/null
     _rule_into rule "━"
     echo -e "${COOK_COLOR}${rule}${NC}"
+    _pace
 }
