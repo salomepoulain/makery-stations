@@ -9,11 +9,11 @@ STATION_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
 
 menu::
 	@bash -c 'source "$(STATION_DIR)cook/personality.sh" && STARTER "$$COOK_NAME'"'"'s Menu" && \
-		ITEM "<<report>>" "<<turns main.tex into main.pdf from report/ folder>>" && \
+		ITEM "report" "Compile the main.tex under report/ into a PDF (REPORT_DIR=<folder> to pick one)" && \
 		LINE'
 
 # Add your recipes below:
 
-# models: Switch between Anthropic and OpenRouter providers
+# report: compile report/**/main.tex into main.pdf
 report:
 	@bash $(STATION_DIR)cook/skills/report.sh
