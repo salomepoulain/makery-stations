@@ -1,0 +1,31 @@
+# ============================================================================
+#  LINE COOK STATION: MESS (Local Artifacts)
+# ============================================================================
+# List files or folders that pile up while this cook is working.
+# When the Head Chef calls `bake germs`, everything listed here is deleted.
+
+# Everything here is regenerated on the next run, so `bake germs` is safe.
+# Not listed: .venv (slow to rebuild), build/ and dist/ (other tools use
+# those names for real content).
+
+# Bytecode, at any depth
+**/__pycache__
+
+# Tool caches: ruff, pytest, mypy, hypothesis
+.ruff_cache
+.pytest_cache
+.mypy_cache
+.hypothesis
+
+# Coverage (pytest-cov)
+.coverage
+.coverage.*
+htmlcov
+coverage.xml
+
+# Packaging metadata from editable installs (flat and src/ layout)
+*.egg-info
+src/*.egg-info
+
+# Jupyter autosaves, at any depth
+**/.ipynb_checkpoints
