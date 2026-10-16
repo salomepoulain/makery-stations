@@ -9,3 +9,4 @@ settings.local.json
 CLAUDE.local.md
 .claude-free
 CLAUDE.local.md.bak.*
+__pycache__/
