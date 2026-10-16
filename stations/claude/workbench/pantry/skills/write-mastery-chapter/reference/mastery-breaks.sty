@@ -1,0 +1,38 @@
+% mastery-breaks.sty: line and page break rules of the mastery chapters (rules in design-system.md, "Line and page breaks").
+% Load it once in the preamble with \usepackage{mastery-breaks}. build-chapter.sh puts this folder on TEXINPUTS.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{mastery-breaks}[2026/09/21 line and page breaks of the mastery chapters]
+\RequirePackage{enumitem}
+\RequirePackage[expansion=false]{microtype}  % font expansion stops the build, one font of the chapters is not scalable
+
+% No hyphenation. A formula in running text never breaks. No single line alone at the top or bottom of a page.
+\hyphenpenalty=10000 \exhyphenpenalty=1000
+\tolerance=2000 \emergencystretch=2em
+\binoppenalty=10000 \relpenalty=10000
+\clubpenalty=10000 \widowpenalty=10000 \displaywidowpenalty=10000
+
+% For the chapter: \mbkeep at the start of a box stops it from breaking inside a paragraph (breaks fall between paragraphs).
+% \mbtight before and after a block forbids a page break there (used by \sol, so a solution stays with its part).
+\newcommand{\mbkeep}{\interlinepenalty=10000 }
+\newcommand{\mbtight}{\par\nobreak}
+
+% Parts of an exercise: a page break may fall between two parts only when 2 or more parts stay on each side, and the intro text
+% never stays alone. Each level-2 list writes its number of parts to the .aux (used by the next run, like the Contents).
+\makeatletter
+\newcounter{dclst}\newcounter{dcpart}
+\newcommand{\dcnp}[2]{\global\@namedef{dcn@#1}{#2}}  % global: the .aux is read inside a group
+\newcommand{\dclistbegin}{\stepcounter{dclst}\setcounter{dcpart}{0}}
+\newcommand{\dclistfirst}{\@beginparpenalty=10000 \edef\dclevel{\the\@listdepth}\let\dcolditem\item
+  \renewcommand{\item}{\@ifnextchar[{\dcitem}{\dcitem[]}}}
+\def\dcitem[#1]{\ifnum\@listdepth=\dclevel\relax\dcpen\fi
+  \ifx\relax#1\relax\dcolditem\else\dcolditem[#1]\fi}
+\newcommand{\dcpen}{\stepcounter{dcpart}%
+  \@ifundefined{dcn@\thedclst}{\ifnum\value{dcpart}<3 \@itempenalty=10000 \else\@itempenalty=3000 \fi}%
+  {\ifnum\value{dcpart}<3 \@itempenalty=10000
+   \else\ifnum\value{dcpart}>\numexpr\csname dcn@\thedclst\endcsname-1\relax \@itempenalty=10000
+   \else\@itempenalty=3000 \fi\fi}}
+\newcommand{\dclistend}{\protected@write\@auxout{}{\string\dcnp{\thedclst}{\thedcpart}}}
+\makeatother
+% The chapter adds the key `partbreaks` to its \setlist[enumerate,2]{...} (a later \setlist replaces an earlier one, so it cannot be set here).
+\SetEnumitemKey{partbreaks}{before=\dclistbegin,first=\dclistfirst,after=\dclistend}
+\endinput

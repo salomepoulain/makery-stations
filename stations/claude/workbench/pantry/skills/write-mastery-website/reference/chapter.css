@@ -1,0 +1,62 @@
+/* ---- chapter body (added by tex2html.py): same boxes as the LaTeX preamble ---- */
+.thy { background: var(--theory); padding: 2pt 8pt 4pt; margin: 8pt 0 0; }
+.thy-t { font-size: 12pt; line-height: 15pt; font-weight: bold; color: var(--c); -webkit-text-stroke: .35pt var(--c); padding: 3pt 0 4pt; text-align: left; }
+.thy.cont { margin-top: 0; }
+.thy p, .worked p, .review p, .recipe p { margin: 4pt 0; }
+.worked { margin: 0 0 8pt; }
+.worked .wq { font-style: italic; margin-top: 3pt; }
+.recipe .steps { margin: 2pt 0; padding-left: 1.4em; }
+.disp { text-align: center; overflow-x: auto; overflow-y: hidden; margin: 6pt 0; }
+.center { text-align: center; }
+.fig { text-align: center; margin: 6pt 0; }
+.fig img { max-width: 100%; height: auto; }
+.sheet ul { margin: 4pt 0; padding-left: 1.5em; }
+.sheet ul li { margin: 2pt 0; }
+.sheet ul li p { margin: 0; }
+.pgroup { font-weight: bold; color: var(--c); border-bottom: .6pt solid color-mix(in srgb, var(--c) 45%, white); padding-bottom: 2pt; margin: 12pt 0 6pt; text-align: left; }
+.pfrom { font-size: 9pt; font-style: italic; color: #666; margin: 0 0 4pt; text-align: left; }
+.pnumber.diag { color: var(--chap); }
+.srcarrow { position: absolute; right: calc(100% + .6em); top: -1.5pt; white-space: nowrap; }
+.tag .chev { margin-right: 4pt; }
+.ex > p:first-of-type { margin-top: 0; }
+.part > p:first-of-type { margin-top: 0; }
+.part { margin-top: 5pt; }
+.review { background: #faf2fa; padding: 2pt 8pt 6pt; margin: 16pt 0 8pt; }
+.rv-t { font-size: 14.4pt; font-weight: bold; color: var(--c); -webkit-text-stroke: .45pt var(--c); padding: 4pt 0; }
+.rv-h { font-weight: bold; color: var(--c); margin: 6pt 0 2pt; }
+.rvterms { line-height: 1.6; text-align: left; }
+.rvt { white-space: nowrap; }
+.tf { color: #808080; }
+.tl { color: var(--c); text-decoration: none; }
+.tl:hover { text-decoration: underline; }
+.rvf { list-style: none; padding-left: 1.5em; margin: 2pt 0; }
+.rvf li { position: relative; margin: 5pt 0; }
+.rvf li::before { content: "\2022"; color: var(--c); position: absolute; left: -1em; }
+.rvr { display: grid; grid-template-columns: 27% 71%; justify-content: space-between; margin: 0 0 7pt; text-align: left; }
+.rvr.sum { display: block; margin-bottom: 9pt; }
+.rvr .rs b, .rvr.sum .rs b { color: var(--c); }
+.sheet.summary { background: #faf2fa; }
+.sumcols { columns: 2; column-gap: 22pt; font-size: 10pt; line-height: 13pt; text-align: left; }
+.sumcols .rvsum { margin-bottom: 14pt; }
+.sumcols .rvr { display: block; }
+.sumhead { font-size: 12pt; font-weight: bold; color: var(--c); -webkit-text-stroke: .35pt var(--c); margin: 14pt 0 4pt; break-after: avoid; }
+.sheet.diag { background: var(--chap10); }
+.sheet.prior .thy-t, .sheet.prior .newterm { color: var(--prior); -webkit-text-stroke-color: var(--prior); }
+@media (max-width: 860px) {
+  .sumcols { columns: 1; }
+  .rvr { display: block; }
+  .srcarrow { position: static; display: inline-block; margin-right: .4em; }
+  .pnumber.diag { position: static; }
+}
+.chain { row-gap: 5pt; }
+.disp { margin: 4pt 0; }
+.disp mjx-container[display="true"] { margin: 0 !important; }
+.pill.T .l { background: #ff9240; } .pill.T .n { background: #ffdfc7; color: #e66200; }
+.pill.V .l { background: #ef56a9; } .pill.V .n { background: #facee6; color: #d21b7e; }
+.pill.O .l { background: #407a7a; } .pill.O .n { background: #c7d8d8; color: #004545; }
+.pill.C .l { background: #c64040; } .pill.C .n { background: #eec7c7; color: #a10000; }
+.pill.R .l { background: #834083; } .pill.R .n { background: #dbc7db; color: #510051; }
+.pill.P .l { background: #e3b240; } .pill.P .n { background: #f7e8c7; color: #c38900; }
+.sheet a { color: var(--link); text-decoration: none; }
+.sheet a:hover { text-decoration: underline; }
+.sumcols li, .sumcols p { overflow-x: auto; overflow-y: hidden; }
