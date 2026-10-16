@@ -5,3 +5,8 @@
 # When the Head Chef calls `bake germs`, everything listed here is deleted.
 
 .claude-free
+
+# Bytecode from the skills' Python scripts. `**` skips hidden folders, so
+# each hidden root is named explicitly.
+.claude/**/__pycache__
+.makery/stations/claude/**/__pycache__
