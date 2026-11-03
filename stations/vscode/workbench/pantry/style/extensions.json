@@ -1,0 +1,26 @@
+{
+    // Extensies die settings.json in deze map nodig heeft.
+    // Als .vscode/extensions.json in een project stelt VS Code ze vanzelf voor.
+    "recommendations": [
+        // Thema en iconen
+        "akamud.vscode-theme-onedark",
+        "thang-nm.flow-icons",
+        "nionx01.polar-black-themes",
+
+        // Editor-weergave
+        "usernamehw.errorlens",
+        "rodolphebarbanneau.python-docstring-highlighter",
+        "aaron-bond.better-comments",
+        "mguellsegarra.highlight-on-copy",
+        "drcika.apc-extension",
+
+        // Notebooks
+        "ms-toolsai.jupyter",
+        "koloskerekes.notebook-cell-index",
+        "community.notebook-minimap",
+
+        // Python inlay hints
+        "ms-python.python",
+        "ms-python.vscode-pylance"
+    ]
+}
