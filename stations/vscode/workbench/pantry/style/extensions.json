@@ -13,14 +13,10 @@
         "aaron-bond.better-comments",
         "mguellsegarra.highlight-on-copy",
         "drcika.apc-extension",
+        "antfu.file-nesting",
 
         // Notebooks
-        "ms-toolsai.jupyter",
         "koloskerekes.notebook-cell-index",
-        "community.notebook-minimap",
-
-        // Python inlay hints
-        "ms-python.python",
-        "ms-python.vscode-pylance"
+        "community.notebook-minimap"
     ]
 }

@@ -26,4 +26,4 @@ VS Code valt terug op een standaardfont als deze ontbreken:
 
 - Flow Icons is betaald. De license key staat hier bewust niet in. Zet `flow-icons.licenseKey` zelf in je user settings.
 - `community.notebook-minimap` is een eigen extensie (github.com/salomepoulain/vscode-notebook-minimap). Staat hij niet in de marketplace van een afgeschermde omgeving, dan installeer je hem als `.vsix`.
-- Zonder de Python/Jupyter-extensies doen de inlay hints en notebook-regels niks. De rest blijft werken.
+- De Python- en Jupyter-extensies staan in `../functionality/extensions.json`. Zonder die extensies doen de inlay hints en notebook-regels niks. De rest blijft werken.
