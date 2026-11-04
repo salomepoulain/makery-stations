@@ -66,7 +66,7 @@ def merge(packs, existing):
     rest = {k: v for k, v in existing.items() if k not in pantry_keys}
     if rest:
         dumped = json.dumps(rest, indent=4, ensure_ascii=False)
-        parts.append("    // ===== eigen instellingen =====\n    " + dumped[1:-1].strip())
+        parts.append("    // ===== your own settings =====\n    " + dumped[1:-1].strip())
     return "{\n" + ",\n\n".join(parts) + "\n}\n"
 
 
@@ -91,7 +91,7 @@ def install_fonts():
             winreg.CloseKey(key)
     if new and sys.platform.startswith("linux") and shutil.which("fc-cache"):
         subprocess.run(["fc-cache", "-f", str(dest)], check=False)
-    print(f"fonts: {len(new)} nieuw, {len(fonts) - len(new)} stonden er al ({dest})")
+    print(f"fonts: {len(new)} new, {len(fonts) - len(new)} already installed ({dest})")
 
 
 def find_code():
@@ -114,7 +114,7 @@ def main():
 
     code = find_code()
     if not code:
-        sys.exit("'code' niet gevonden. Installeer de extensies uit */extensions.json met de hand.")
+        sys.exit("'code' not found. Install the extensions from */extensions.json by hand.")
     for pack in PACKS:
         for ext in load(HERE / pack / "extensions.json").get("recommendations", []):
             subprocess.run([code, "--install-extension", ext], check=False)

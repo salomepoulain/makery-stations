@@ -1,7 +1,7 @@
 {
-    // Altijd: extensies voor hoe VS Code zich gedraagt.
-    // Zet dit bestand in een project als .vscode/extensions.json, dan stelt
-    // VS Code ze vanzelf voor.
+    // Always: extensions for how VS Code behaves.
+    // Put this file in a project as .vscode/extensions.json and VS Code
+    // will recommend them.
     "recommendations": [
         "editorconfig.editorconfig",
         "fabiospampinato.vscode-todo-plus",

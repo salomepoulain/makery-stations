@@ -1,13 +1,13 @@
 {
-    // Extensies die settings.json in deze map nodig heeft.
-    // Als .vscode/extensions.json in een project stelt VS Code ze vanzelf voor.
+    // Extensions that settings.json in this folder needs.
+    // As .vscode/extensions.json in a project, VS Code will recommend them.
     "recommendations": [
-        // Thema en iconen
+        // Theme and icons
         "akamud.vscode-theme-onedark",
         "thang-nm.flow-icons",
         "nionx01.polar-black-themes",
 
-        // Editor-weergave
+        // Editor display
         "usernamehw.errorlens",
         "rodolphebarbanneau.python-docstring-highlighter",
         "aaron-bond.better-comments",

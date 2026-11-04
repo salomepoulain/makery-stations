@@ -1,14 +1,14 @@
 {
-    // Altijd: hoe VS Code zich gedraagt.
+    // Always: how VS Code behaves.
 
-    // MARK: Bestanden en opslaan
+    // MARK: Files and saving
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
     "files.autoSave": "onFocusChange",
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
 
-    // MARK: Editor-gedrag
+    // MARK: Editor behavior
     "editor.unfoldOnClickAfterEndOfLine": false,
     "editor.foldingImportsByDefault": false,
     "editor.unicodeHighlight.ambiguousCharacters": false,
@@ -28,7 +28,7 @@
     "editor.suggest.matchOnWordStartOnly": false,
     "editor.suggest.showSnippets": false,
 
-    // MARK: Tabs en opstarten
+    // MARK: Tabs and startup
     "workbench.editor.enablePreview": false,
     "workbench.editor.enablePreviewFromQuickOpen": false,
     "workbench.startupEditor": "none",
@@ -48,12 +48,12 @@
     "terminal.integrated.scrollback": 100000,
     "terminal.integrated.gpuAcceleration": "on",
 
-    // MARK: Notebooks en markdown
+    // MARK: Notebooks and markdown
     "markdown.preview.linkify": false,
     "notebook.output.scrolling": true,
     "notebook.output.textLineLimit": 20,
 
-    // MARK: Remote SSH (ms-vscode-remote.remote-ssh), zonder hosts of paden
+    // MARK: Remote SSH (ms-vscode-remote.remote-ssh), without hosts or paths
     "remote.autoForwardPortsSource": "hybrid",
     "remote.SSH.remoteServerListenOnSocket": true,
 

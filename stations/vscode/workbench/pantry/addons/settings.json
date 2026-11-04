@@ -1,5 +1,5 @@
 {
-    // Per project: alleen meenemen als je deze extensies gebruikt.
+    // Per project: only take this along if you use these extensions.
 
     // MARK: Python (ms-python.python, ms-python.vscode-pylance)
     "[python]": {

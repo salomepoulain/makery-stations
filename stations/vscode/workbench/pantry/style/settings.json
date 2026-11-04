@@ -1,7 +1,7 @@
 {
-    // Altijd: hoe VS Code eruitziet.
+    // Always: how VS Code looks.
 
-    // MARK: Thema's en iconen
+    // MARK: Themes and icons
     "workbench.colorTheme": "Atom One Dark",
     "workbench.iconTheme": "flow-dim",
     "workbench.productIconTheme": "polar-black-ui",
@@ -31,7 +31,7 @@
     "flow-icons.folderColor": "blue",
     "flow-icons.hidesExplorerArrows": false,
 
-    // MARK: Kleuren
+    // MARK: Colors
     "editor.tokenColorCustomizations": {
         "textMateRules": [
             {
@@ -705,7 +705,7 @@
         "symbolIcon": "#ff0000"
     },
 
-    // MARK: Lettertypes
+    // MARK: Fonts
     "editor.fontFamily": "Fira Code,  Cascadia Code",
     "editor.inlineSuggest.fontFamily": "Fira Code",
     "editor.fontLigatures": true,
@@ -790,7 +790,7 @@
     // MARK: APC (drcika.apc-extension)
     "apc.menubar.compact": true,
 
-    // MARK: Explorer en file nesting (antfu.file-nesting)
+    // MARK: Explorer and file nesting (antfu.file-nesting)
     "explorer.sortOrder": "type",
     "explorer.decorations.badges": false,
     "explorer.compactFolders": false,
@@ -913,7 +913,7 @@
     "terminal.integrated.cursorWidth": 2,
     "terminal.integrated.fontSize": 12,
 
-    // MARK: Gutter, git en diff-decoraties
+    // MARK: Gutter, git and diff decorations
     "scm.diffDecorations": "none",
     "git.blame.editorDecoration.enabled": false,
     "git.decorations.enabled": false,
