@@ -1,0 +1,19 @@
+{
+    // Per project: neem alleen de extensies mee die je nodig hebt.
+    // Instellingen staan per extensie onder een MARK in settings.json.
+    "recommendations": [
+        // MARK: Python
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.debugpy",
+        "charliermarsh.ruff",
+        "ryuta46.multi-command",
+
+        // MARK: Notebooks en data
+        "ms-toolsai.jupyter",
+        "ms-toolsai.datawrangler",
+
+        // MARK: TOML
+        "tamasfe.even-better-toml"
+    ]
+}

@@ -1,4 +1,5 @@
 {
+    // Altijd: hoe VS Code eruitziet.
 
     // MARK: Thema's en iconen
     "workbench.colorTheme": "Atom One Dark",
@@ -765,6 +766,8 @@
     "debug.showBreakpointsInOverviewRuler": false,
 
     // MARK: Workbench layout
+    "window.autoDetectHighContrast": false,
+    "workbench.preferredHighContrastLightColorTheme": "Dark Modern",
     "workbench.editor.tabSizing": "fixed",
     "workbench.reduceMotion": "on",
     "workbench.editor.tabSizingFixedMaxWidth": 120,
@@ -782,10 +785,12 @@
     "window.customTitleBarVisibility": "windowed",
     "workbench.experimental.modernUI": true,
     "problems.decorations.enabled": false,
-    "apc.menubar.compact": true,
     "breadcrumbs.enabled": false,
 
-    // MARK: Explorer
+    // MARK: APC (drcika.apc-extension)
+    "apc.menubar.compact": true,
+
+    // MARK: Explorer en file nesting (antfu.file-nesting)
     "explorer.sortOrder": "type",
     "explorer.decorations.badges": false,
     "explorer.compactFolders": false,
@@ -926,8 +931,13 @@
     "diffEditor.renderSideBySide": false,
     "notebook.diff.overviewRuler": true,
 
-    // MARK: Error Lens
+    // MARK: Error Lens (usernamehw.errorlens)
     "errorLens.messageBackgroundMode": "message",
+    "errorLens.enabledDiagnosticLevels": [
+        "error",
+        "info",
+        "hint"
+    ],
     "errorLens.fontFamily": "Cascadia Code",
     "errorLens.alignMessage": {
         "start": 50,
@@ -949,6 +959,8 @@
     "errorLens.fontWeight": "normal",
     "errorLens.margin": "1ch",
     "errorLens.enabled": true,
+    "errorLens.delayMode": "new",
+    "errorLens.delay": 1,
     "errorLens.fontStyleItalic": false,
     "errorLens.editorHoverPartsEnabled": {
         "messageEnabled": true,
@@ -957,6 +969,9 @@
     "errorLens.statusBarIconsEnabled": true,
     "errorLens.problemRangeDecorationEnabled": true,
     "errorLens.statusBarColorsEnabled": true,
+    "errorLens.codeLensOnClick": "showQuickFix",
+    "errorLens.ignoreDirty": true,
+    "errorLens.statusBarCommand": "goToLine",
     "errorLens.decorations": {
         "errorRange": {
             "textDecoration": ";background-clip:text;border-bottom:1.4px solid #e57373",
@@ -989,15 +1004,24 @@
             "backgroundColor": "#fff0"
         }
     },
+    "errorLens.excludeByMessage": [
+        "code:W0511"
+    ],
     "errorLens.messageEnabled": false,
+    "errorLens.ignoreUntitled": true,
+    "errorLens.respectUpstreamEnabled": {
+        "statusBar": true
+    },
     "errorLens.statusBarIconsPriority": 10000,
     "errorLens.statusBarIconsTargetProblems": "visibleEditors",
     "errorLens.statusBarMessageEnabled": true,
     "errorLens.statusBarMessageType": "activeLine",
     "errorLens.statusBarIconsUseBackground": false,
 
-    // MARK: Highlights
+    // MARK: Better Comments (aaron-bond.better-comments)
     "better-comments.highlightPlainText": true,
+
+    // MARK: Highlight on Copy (mguellsegarra.highlight-on-copy)
     "highlightOnCopy.backgroundColor": "rgba(146, 169, 233, .3)",
     "highlightOnCopy.foregroundColor": "#fff",
     "highlightOnCopy.timeout": 200,
@@ -1007,12 +1031,16 @@
     "notebook.compactView": true,
     "notebook.output.wordWrap": true,
     "notebook.output.fontFamily": "fira code",
-    "notebookCellIndex.showTotal": true,
-    "notebookCellIndex.customFormat": "{section}. {sectionTitle} | {n}/{total} | {grandTotal}",
-    "notebookCellIndex.resetCounterOnSection": "h1-h2",
     "notebook.outline.showCodeCellSymbols": false,
     "notebook.markup.fontFamily": "CMU Serif, STIX Two Text",
     "notebook.lineNumbers": "on",
+
+    // MARK: Notebook Cell Index (koloskerekes.notebook-cell-index)
+    "notebookCellIndex.showTotal": true,
+    "notebookCellIndex.customFormat": "{section}. {sectionTitle} | {n}/{total} | {grandTotal}",
+    "notebookCellIndex.resetCounterOnSection": "h1-h2",
+
+    // MARK: Notebook Minimap (community.notebook-minimap)
     "notebookMinimap.fillPanelWidth": false,
     "notebookMinimap.renderCharacters": true,
     "notebookMinimap.enableIndent": true,
@@ -1022,9 +1050,5 @@
     // MARK: Chat-UI
     "chat.commandCenter.enabled": false,
     "inlineChat.lineNaturalLanguageHint": false,
-    "chat.viewSessions.orientation": "stacked",
-
-    // MARK: Inlay hints
-    "python.analysis.inlayHints.pytestParameters": true,
-    "python.analysis.inlayHints.functionReturnTypes": true
+    "chat.viewSessions.orientation": "stacked"
 }

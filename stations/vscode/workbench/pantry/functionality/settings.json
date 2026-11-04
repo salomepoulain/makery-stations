@@ -1,54 +1,62 @@
 {
-    // Instellingen voor de extensies in extensions.json. Opmaak staat in ../style/.
+    // Altijd: hoe VS Code zich gedraagt.
 
-    // MARK: Python
-    "[python]": {
-        "editor.defaultFormatter": null,
-        "editor.formatOnSave": false,
-        "diffEditor.ignoreTrimWhitespace": false
-    },
-    "python.terminal.activateEnvironment": false,
-    "python.testing.pytestEnabled": true,
-    "python.testing.pytestArgs": [
-        "--rootdir=.",
-        "--asyncio-mode=auto"
-    ],
-    "python.testing.cwd": ".",
-    "python.analysis.typeCheckingMode": "basic",
-    "python.analysis.autoFormatStrings": true,
-    "python.analysis.completeFunctionParens": true,
-    "python.analysis.generateWithTypeAnnotation": true,
-    "python.analysis.showOnlyDirectDependenciesInAutoImport": true,
-    "python.analysis.typeEvaluation.deprecateTypingAliases": true,
-    "python.analysis.typeEvaluation.enableReachabilityAnalysis": true,
-    "python.analysis.typeEvaluation.disableBytesTypePromotions": true,
-    "python.analysis.typeEvaluation.strictDictionaryInference": true,
-    "python.analysis.typeEvaluation.strictListInference": true,
-    "python.analysis.typeEvaluation.strictSetInference": true,
-    "python.analysis.diagnosticSeverityOverrides": {},
+    // MARK: Bestanden en opslaan
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "files.autoSave": "onFocusChange",
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
 
-    // MARK: Jupyter en Data Wrangler
-    "jupyter.askForKernelRestart": false,
-    "jupyter.widgetScriptSources": [
-        "jsdelivr.com",
-        "unpkg.com"
-    ],
-    "jupyter.enableExtendedPythonKernelCompletions": true,
-    "dataWrangler.defaultViewingFilterOptions": "advanced",
-    "dataWrangler.outputRenderer.columnInsights.displayByDefault": true,
+    // MARK: Editor-gedrag
+    "editor.unfoldOnClickAfterEndOfLine": false,
+    "editor.foldingImportsByDefault": false,
+    "editor.unicodeHighlight.ambiguousCharacters": false,
+    "editor.wordWrap": "off",
+    "editor.links": false,
+    "editor.copyWithSyntaxHighlighting": false,
+    "editor.emptySelectionClipboard": true,
+    "editor.snippetSuggestions": "top",
+    "editor.detectIndentation": false,
+    "editor.hover.delay": 500,
+    "editor.hover.enabled": "on",
+    "editor.gotoLocation.multipleReferences": "goto",
+    "editor.gotoLocation.multipleTypeDefinitions": "goto",
+    "editor.gotoLocation.multipleDeclarations": "goto",
+    "editor.gotoLocation.multipleDefinitions": "goto",
+    "editor.gotoLocation.multipleImplementations": "goto",
+    "editor.suggest.matchOnWordStartOnly": false,
+    "editor.suggest.showSnippets": false,
 
-    // MARK: Multi Command
-    "multiCommand.commands": [
-        {
-            "command": "multiCommand.foldThenFoldDocstrings",
-            "sequence": [
-                "editor.unfoldRecursively",
-                "pylance.foldDocstrings"
-            ]
-        }
-    ],
+    // MARK: Tabs en opstarten
+    "workbench.editor.enablePreview": false,
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "workbench.startupEditor": "none",
 
-    // MARK: Remote SSH (zonder hosts of paden)
+    // MARK: Git
+    "git.autofetch": true,
+    "githubRepositories.autoFetch.enabled": true,
+    "git.confirmSync": false,
+    "git.suggestSmartCommit": false,
+    "testing.defaultGutterClickAction": "contextMenu",
+    "diffEditor.ignoreTrimWhitespace": false,
+
+    // MARK: Terminal
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    "terminal.integrated.ignoreBracketedPasteMode": true,
+    "terminal.integrated.accessibleViewPreserveCursorPosition": true,
+    "terminal.integrated.scrollback": 100000,
+    "terminal.integrated.gpuAcceleration": "on",
+
+    // MARK: Notebooks en markdown
+    "markdown.preview.linkify": false,
+    "notebook.output.scrolling": true,
+    "notebook.output.textLineLimit": 20,
+
+    // MARK: Remote SSH (ms-vscode-remote.remote-ssh), zonder hosts of paden
     "remote.autoForwardPortsSource": "hybrid",
-    "remote.SSH.remoteServerListenOnSocket": true
+    "remote.SSH.remoteServerListenOnSocket": true,
+
+    // MARK: Privacy
+    "telemetry.telemetryLevel": "off"
 }
