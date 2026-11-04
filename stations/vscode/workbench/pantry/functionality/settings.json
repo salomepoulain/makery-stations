@@ -58,5 +58,13 @@
     "remote.SSH.remoteServerListenOnSocket": true,
 
     // MARK: Privacy
-    "telemetry.telemetryLevel": "off"
+    "telemetry.telemetryLevel": "off",
+
+    // MARK: Copilot agent (AGENTS.md and skills)
+    // Read the AGENTS.md the copilot station writes in the project root.
+    // Skills in .agents/skills are found without a setting.
+    "chat.useAgentsMdFile": true,
+    // Don't also pull in CLAUDE.md / CLAUDE.local.md: AGENTS.md carries the
+    // same rules, so Copilot gets them once.
+    "chat.useClaudeMdFile": false
 }
