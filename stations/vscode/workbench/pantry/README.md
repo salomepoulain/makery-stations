@@ -8,7 +8,7 @@ Mijn VS Code-setup in drie pakketten. Er staan geen keys, SSH-hosts of machinepa
 | `functionality/` | altijd | autosave, editor-gedrag, tabs, git, terminal, privacy, Todo+, Remote SSH |
 | `addons/` | per project | Python, Pylance, Ruff, Jupyter, Data Wrangler, TOML |
 
-Elk pakket heeft een `settings.json` en een `extensions.json`. Binnen een bestand heeft elke extensie een eigen `// MARK:`-sectie.
+Elk pakket heeft een `settings.json` en een `extensions.json`. `functionality/.editorconfig` kopieer je naar de root van een project, de EditorConfig-extensie leest hem dan. Binnen een bestand heeft elke extensie een eigen `// MARK:`-sectie.
 
 ## Installeren
 
