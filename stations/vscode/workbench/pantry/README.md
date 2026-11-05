@@ -8,27 +8,13 @@ My VS Code setup in three packs. There are no keys, SSH hosts or machine paths i
 | `functionality/` | always | autosave, editor behavior, tabs, git, terminal, privacy, Todo+, Remote SSH |
 | `addons/` | per project | Python, Pylance, Ruff, Jupyter, Data Wrangler, TOML |
 
-Each pack has a `settings.json` and an `extensions.json`. Copy `functionality/.editorconfig` to the root of a project and the EditorConfig extension reads it. Inside each file, every extension has its own `// MARK:` section.
+Each pack has a `settings.json` and an `extensions.json`. Inside each file, every extension has its own `// MARK:` section. Copy `functionality/.editorconfig` to the root of a project and the EditorConfig extension reads it.
 
-## Install with the script
+Want everything? `settings.json` and `extensions.json` in this folder are the three packs in one file. There's no install script: you copy and paste, so nothing runs and nothing gets downloaded behind your back.
 
-If you have Python 3, run this in this folder:
+## Install
 
-```bash
-python3 install.py                      # all three
-python3 install.py style functionality  # without addons
-```
-
-On Windows the command is often `python` instead of `python3`. The script:
-
-1. backs up your user `settings.json` (`settings.json.bak-<date>`),
-2. writes the packs into it, keeping their MARK sections. Existing keys that are also in the pantry get overwritten. Your other settings go at the bottom under `your own settings`. Comments from your old file are lost, but they are still in the backup.
-3. installs the fonts from `fonts/` (only with `style`),
-4. installs the extensions with `code --install-extension`.
-
-## Install by hand
-
-No Python? Then do the same three steps yourself. It takes a few minutes.
+It takes a few minutes.
 
 ### 1. Fonts
 
@@ -40,37 +26,23 @@ Do this first, so VS Code picks them up on the next start.
 
 ### 2. Extensions
 
-Open a terminal in this folder.
+Open the Extensions sidebar in VS Code, search for each name in `extensions.json` and click "Install". Or put `extensions.json` in a project as `.vscode/extensions.json`: VS Code then shows them all under "Recommended".
 
-macOS and Linux:
-
-```bash
-grep -hoE '"[a-z0-9-]+\.[a-z0-9-]+"' */extensions.json | tr -d '"' | xargs -n1 code --install-extension
-```
-
-Windows (PowerShell):
-
-```powershell
-Select-String -Path */extensions.json -Pattern '"([a-z0-9-]+\.[a-z0-9-]+)"' -AllMatches | % { $_.Matches } | % { code --install-extension $_.Groups[1].Value }
-```
-
-To skip `addons`, replace `*/extensions.json` with `style/extensions.json, functionality/extensions.json` (PowerShell) or `style/extensions.json functionality/extensions.json` (bash).
-
-Does `code` not work in your terminal? Then open the Extensions sidebar in VS Code, search for each name in the `extensions.json` files and click "Install".
+No marketplace, like on a locked-down machine? Install a `.vsix` file with right-click, "Install Extension VSIX" in the Explorer.
 
 ### 3. Settings
 
 1. In VS Code, open the Command Palette (`Cmd+Shift+P` or `Ctrl+Shift+P`) and choose "Preferences: Open User Settings (JSON)".
 2. Copy what's in there somewhere safe, as a backup.
-3. Paste the contents of `style/settings.json`. Then copy only what's between the outer `{` and `}` of `functionality/settings.json` and `addons/settings.json`, and paste it after that. Put a comma between the blocks.
-4. Already had settings? Keep them, but remove keys that now appear twice. VS Code underlines duplicate keys.
+3. Replace it with the contents of `settings.json` from this folder. Without addons? Take `style/settings.json` and paste only what's between the outer `{` and `}` of `functionality/settings.json` after it, with a comma in between.
+4. Had your own settings? Paste them back at the bottom, before the last `}`, and remove keys that now appear twice. VS Code underlines duplicate keys.
 5. Save and restart VS Code.
 
-Extensions for just one project? Put `addons/extensions.json` in that project as `.vscode/extensions.json`. VS Code will then recommend the extensions itself.
+Extensions for just one project? Put `addons/extensions.json` in that project as `.vscode/extensions.json`.
 
 ## Fonts
 
-The fonts are in `fonts/`, as `.ttf` for macOS, Windows and Linux. `install.py` installs them for your own user when you include the `style` pack; by hand it works as described above. Neither needs admin rights. Restart VS Code afterwards. Licenses are in `fonts/LICENSES.md`.
+The fonts are in `fonts/`, as `.ttf` for macOS, Windows and Linux. Installing them as above needs no admin rights. Restart VS Code afterwards. Licenses are in `fonts/LICENSES.md`.
 
 Install them on the machine where VS Code runs, not on a remote server.
 
@@ -81,6 +53,7 @@ Install them on the machine where VS Code runs, not on a remote server.
 
 ## Notes
 
+- In the offline package (`makery-bakery-offline.zip`) this folder also has `makery-kitchen-explorer-<version>.vsix`. After `bake first vscode`, right-click it in `.makery/stations/vscode/workbench/pantry/` and choose "Install Extension VSIX".
 - Flow Icons is paid. The license key is deliberately not in here. Put `flow-icons.licenseKey` in your own user settings.
 - `community.notebook-minimap` is my own extension (github.com/salomepoulain/vscode-notebook-minimap). If it's not in the marketplace of a locked-down environment, install it as a `.vsix`.
 - Without Jupyter from `addons/`, the notebook settings in `style/` do nothing. Everything else still works.

@@ -31,10 +31,8 @@
 
     // MARK: Jupyter (ms-toolsai.jupyter)
     "jupyter.askForKernelRestart": false,
-    "jupyter.widgetScriptSources": [
-        "jsdelivr.com",
-        "unpkg.com"
-    ],
+    // No widget code from CDNs: nothing gets downloaded.
+    "jupyter.widgetScriptSources": [],
     "jupyter.enableExtendedPythonKernelCompletions": true,
 
     // MARK: Data Wrangler (ms-toolsai.datawrangler)

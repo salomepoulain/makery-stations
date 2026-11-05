@@ -1,0 +1,44 @@
+{
+    // Every extension from style/ + functionality/ + addons/.
+    // Put this in a project as .vscode/extensions.json and VS Code recommends them all.
+    "recommendations": [
+        // ===== style/ =====
+        // Theme and icons
+        "akamud.vscode-theme-onedark",
+        "thang-nm.flow-icons",
+        "nionx01.polar-black-themes",
+
+        // Editor display
+        "usernamehw.errorlens",
+        "rodolphebarbanneau.python-docstring-highlighter",
+        "aaron-bond.better-comments",
+        "mguellsegarra.highlight-on-copy",
+        "drcika.apc-extension",
+        "antfu.file-nesting",
+
+        // Notebooks
+        "koloskerekes.notebook-cell-index",
+        "community.notebook-minimap",
+
+        // ===== functionality/ =====
+        "editorconfig.editorconfig",
+        "fabiospampinato.vscode-todo-plus",
+        "salomepoulain.makery-kitchen-explorer",
+        "ms-vscode-remote.remote-ssh",
+
+        // ===== addons/ =====
+        // MARK: Python
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.debugpy",
+        "charliermarsh.ruff",
+        "ryuta46.multi-command",
+
+        // MARK: Notebooks and data
+        "ms-toolsai.jupyter",
+        "ms-toolsai.datawrangler",
+
+        // MARK: TOML
+        "tamasfe.even-better-toml"
+    ]
+}
