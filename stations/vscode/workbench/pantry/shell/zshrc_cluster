@@ -1,0 +1,40 @@
+# Shell config for a server without internet. Nothing to install, nothing
+# reaches the network. Only zsh built-ins, no oh-my-zsh or plugins.
+# Drag the whole shell/ folder to ~/.shell, then load it from ~/.zshrc with:
+#   [ -f ~/.shell/zshrc_cluster ] && . ~/.shell/zshrc_cluster
+
+[[ -o interactive ]] || return
+
+# History: big, no duplicates, shared between terminals.
+HISTFILE=~/.zsh_history
+HISTSIZE=100000
+SAVEHIST=100000
+setopt share_history hist_ignore_all_dups hist_ignore_space
+
+# Type a folder name to cd into it.
+setopt auto_cd
+
+# Tab completion with a menu, case-insensitive. -i skips folders other users
+# can write to, which is common on shared servers.
+autoload -Uz compinit && compinit -i
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+# Up and down arrows search history for what you've typed so far, a bit like
+# zsh-autosuggestions without the plugin.
+autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey '^[[A' up-line-or-beginning-search
+bindkey '^[[B' down-line-or-beginning-search
+
+# ls looks like lsd (see lsd.sh); ll is the normal long listing.
+[ -f ~/.shell/lsd.sh ] && . ~/.shell/lsd.sh
+alias ll='command ls -lh --color=auto --group-directories-first'
+alias la='ls -a'
+alias lt='tree -C 2>/dev/null || find . -maxdepth 2'
+alias c='printf "\033c"'
+alias pip=pip3
+
+# Prompt in the style of Powerlevel10k lean (see prompt.sh).
+[ -f ~/.shell/prompt.sh ] && . ~/.shell/prompt.sh
