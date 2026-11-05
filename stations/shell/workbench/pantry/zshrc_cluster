@@ -1,6 +1,6 @@
 # Shell config for a server without internet. Nothing to install, nothing
 # reaches the network. Only zsh built-ins, no oh-my-zsh or plugins.
-# Drag the whole shell/ folder to ~/.shell, then load it from ~/.zshrc with:
+# Copy this folder to ~/.shell (see README.md), then load it from ~/.zshrc with:
 #   [ -f ~/.shell/zshrc_cluster ] && . ~/.shell/zshrc_cluster
 
 [[ -o interactive ]] || return

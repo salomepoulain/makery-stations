@@ -1,6 +1,6 @@
 # Shell config for a server without internet. Nothing to install, nothing
 # reaches the network.
-# Drag the whole shell/ folder to ~/.shell, then load it from ~/.bashrc with:
+# Copy this folder to ~/.shell (see README.md), then load it from ~/.bashrc with:
 #   [ -f ~/.shell/bashrc_cluster ] && . ~/.shell/bashrc_cluster
 
 # Only in a terminal you type in, so scp and VS Code's own server stay untouched.

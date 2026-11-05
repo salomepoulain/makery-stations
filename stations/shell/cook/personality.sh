@@ -39,10 +39,10 @@ hex_to_truecolor() {
 
 # SELECT IDENTITY (Override these in your station)
 # -----------------------------------------------------
-COOK_ICON="✈" # find at https://emojidb.org/
+COOK_ICON="❯" # find at https://emojidb.org/
 # COOK_NAME is auto-derived from parent folder name (e.g., stations/claude/ → "claude")
-COOK_NAME="copilot"
-COOK_COLOR=$(hex_to_truecolor "#8957E5")
+COOK_NAME="shell"
+COOK_COLOR=$(hex_to_truecolor "#98C379")
 #COOK_COLOR="$CYAN"
 
 _HC_ID_VISIBLE_OFFSET=0

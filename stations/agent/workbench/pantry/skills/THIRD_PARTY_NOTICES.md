@@ -5,7 +5,7 @@ skills sourced from or based on third-party repositories. This file records prov
 license obligations for the latter, determined by diffing each active `SKILL.md` against
 reference copies of the upstream repositories.
 
-This copy belongs to the copilot station, which ships only the local-only subset of the
+This copy belongs to the agent station, which ships only the local-only subset of the
 claude station's skills. Skills named below that aren't in this folder were left out.
 
 ---

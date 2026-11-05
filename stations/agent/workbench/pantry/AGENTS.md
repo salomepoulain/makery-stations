@@ -1,8 +1,8 @@
-<!-- copilot-station: AGENTS.md -->
+<!-- agent-station: AGENTS.md -->
 # Instructions for this project
 
-Written by the makery `copilot` station (`bake first copilot`). It's gitignored, so it stays on
-this machine and never reaches the team's repo. `bake burnt copilot` removes it again.
+Written by the makery `agent` station (`bake first agent`). It's gitignored, so it stays on
+this machine and never reaches the team's repo. `bake burnt agent` removes it again.
 
 ## SECTION: security
 

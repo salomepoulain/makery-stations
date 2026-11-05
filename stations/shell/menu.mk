@@ -1,4 +1,4 @@
-# copilot/menu.mk
+# shell/menu.mk
 # Standalone Makefile. Works with: cd .makery/kitchen/stations/<name> && make <recipe>
 
 # Recipes defined below are run via: bake call s=<station> d=<recipe>
@@ -7,7 +7,7 @@
 # Compute station directory when included from main menu.mk
 STATION_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
 
-# No recipes yet: hiring puts the skills in .agents/skills, and that's all
-# this station does. Without an ITEM line, bake shows no menu for it.
+# No recipes: the shell config goes in your home, which bake doesn't touch.
+# Hiring shows the two commands. Without an ITEM line, bake shows no menu.
 menu::
 	@true
